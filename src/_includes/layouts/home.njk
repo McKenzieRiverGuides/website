@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include "partials/head.njk" %}
+<link rel="stylesheet" href="/assets/css/home.css?v={{ build.version }}">
+</head>
+<body data-page="home">
+{% include "partials/header.njk" %}
+<main>
+{{ content | safe }}
+</main>
+{% include "partials/footer.njk" %}
+<script src="/assets/js/site.js?v={{ build.version }}"></script>
+<script src="/assets/js/home.js?v={{ build.version }}"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+---
+title: Join
+description: Join the McKenzie River Guides Association as an associate member or a guide.
+navKey: join
+permalink: /join/
+---
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Join the <em>association</em></h1>
+      <p class="status">Guides and friends of the river, backing the McKenzie together since 1931.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="join">
+      <div class="join-card a">
+        <span class="eyebrow">Associate members</span>
+        <h3>Support the McKenzie</h3>
+        <p>For friends of the river, often our guides' clients.</p>
+        <ul class="grow">
+          <li>Your name on the supporters list</li>
+          <li>News &amp; Stories{% if collections.newsletters.length %} and the newsletter{% endif %}</li>
+        </ul>
+        {% if text.join.associate_dues %}<div class="price">{{ text.join.associate_dues }} <small>per year</small></div>{% else %}<div class="price">$__ <small>per year</small> <span class="sample">Dues to come</span></div>{% endif %}
+        <a class="btn" href="{{ text.join.associate_apply_url or ('mailto:' + settings.email + '?subject=Associate%20membership') }}">Apply as an associate</a>
+      </div>
+      <div class="join-card b">
+        <span class="eyebrow">For guides</span>
+        <h3>Join as a guide</h3>
+        <p>For professional guides on the McKenzie. Requires two sponsors who are active guides and a current Oregon Marine Board license.</p>
+        <ul class="grow">
+          <li>Listing in Find a Guide</li>
+          <li>A voice in association decisions</li>
+        </ul>
+        {% if text.join.guide_dues %}<div class="price" style="color:var(--river)">{{ text.join.guide_dues }} <small>per year</small></div>{% else %}<div class="price" style="color:var(--river)">$__ <small>per year</small> <span class="sample">Dues to come</span></div>{% endif %}
+        <a class="btn btn-line" href="{{ text.join.guide_apply_url or ('mailto:' + settings.email + '?subject=Guide%20membership') }}">Apply to join</a>
+      </div>
+      <div class="join-card c" id="give">
+        <span class="eyebrow">Tax-deductible giving</span>
+        <h3>Give to the Foundation</h3>
+        <p class="grow">MRGA dues aren't tax-deductible. The McKenzie Guides Foundation, a separate 501(c)(3), accepts tax-deductible gifts.</p>
+        {% if settings.foundation_url %}<a class="btn btn-line" href="{{ settings.foundation_url }}" target="_blank" rel="noopener">Visit the Foundation <span aria-hidden="true">↗</span></a>{% else %}<span class="btn btn-line" aria-disabled="true">Foundation website coming soon</span>{% endif %}
+      </div>
+    </div>
+    <p class="join-note">New associate and guide members are approved by a vote of the membership at the annual meeting.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">How it works</span><h2>How membership works</h2></div></div>
+    <ol class="steps">
+      <li><h3>Apply</h3><p>Choose associate member or guide. Guides name two sponsors who are current active guides and show a current Oregon Marine Board license. {% if text.join.how_to_apply %}{{ text.join.how_to_apply }}{% else %}<span class="placeholder-text">How to apply and pay dues: to come.</span>{% endif %}</p></li>
+      <li><h3>Membership vote</h3><p>The members vote on every new associate and guide member at the annual meeting.</p></li>
+      <li><h3>You're on the list</h3><p>Once you're voted in, your name goes on the website: guides in Find a Guide, associates on Members &amp; supporters. No one is listed before the vote.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Questions</span><h2>Common questions</h2></div></div>
+    <div class="faq">
+      <details><summary>Are dues tax-deductible?</summary><p>No. MRGA is a 501(c)(4) membership association, so dues aren't deductible as charitable donations. For a tax-deductible gift, give to the McKenzie Guides Foundation, a separate 501(c)(3).</p></details>
+      <details><summary>When do memberships renew?</summary>{% if text.join.renewal %}{{ text.join.renewal | paras | safe }}{% else %}<p class="placeholder-text">Placeholder answer for the board to fill in.</p>{% endif %}</details>
+      <details><summary>Who can join as a guide?</summary><p>Professional guides on the McKenzie who hold a current Oregon Marine Board license and have two sponsors who are current active guides. New guide members are approved by a membership vote at the annual meeting.</p></details>
+      <details><summary>When will my name appear on the website?</summary><p>After the membership votes you in at the annual meeting. Applicants aren't listed until then.</p></details>
+      <details><summary>How do I update my listing?</summary><p>Active guides can edit their own Find a Guide card. Go to <a href="/edit-listing/">Edit my listing</a> and we'll email you a sign-in link. Changes show on the website within a few minutes.</p></details>
+    </div>
+  </div>
+</section>

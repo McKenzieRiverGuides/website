@@ -1,0 +1,7 @@
+{#- One Find a Guide card. Keep in step with card() in assets/js/find-a-guide.js. Never show town. -#}
+{%- set sp = g["Specialty"] | specs -%}
+<article class="gcard"><div class="gcard-top"><span class="mono" aria-hidden="true">{{ (g["First Name"] | first) }}{{ (g["Last Name"] | first) }}</span><div><h3>{{ (g["First Name"] + " " + g["Last Name"]) | trim }}</h3>{% if g.Business %}<p class="biz">{{ g.Business }}</p>{% endif %}</div></div>
+{%- if g["Life Member"] | yes %}<span class="badge">Life member</span>{% endif -%}
+{%- if sp.length %}<p class="specs">{{ sp | join(" · ") }}</p>{% endif -%}
+{%- if g.Phone or g.Link %}<div class="gcard-links">{% if g.Phone %}<a href="tel:{{ g.Phone | telHref }}">{{ g.Phone }}</a>{% endif %}{% if g.Link %}<a href="{{ g.Link | linkHref }}" target="_blank" rel="noopener">{{ g.Link | linkHost }} ↗</a>{% endif %}</div>{% endif -%}
+</article>

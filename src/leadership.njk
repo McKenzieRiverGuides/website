@@ -1,0 +1,43 @@
+---
+title: Leadership
+description: Officers and board of directors of the McKenzie River Guides Association.
+navKey: leadership
+permalink: /leadership/
+---
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Our <em>leadership</em></h1>
+      <p class="status">Officers and board of directors, {{ leadership.year }}. Guides elected by the membership.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Officers {{ leadership.year }}</span><h2>Officers</h2></div>
+      <p>Officers are nominated and elected for two-year terms, every other year, at the annual meeting on the second Saturday in January.</p>
+    </div>
+    <div class="officers">
+      {%- for o in leadership.officers %}
+      <div class="officer">{% if o.photo %}<img src="{{ o.photo }}" alt="{{ o.name }}" loading="lazy">{% else %}<div class="ph" aria-hidden="true" style="grid-row:1/span 3;aspect-ratio:1;border-radius:10px"></div>{% endif %}<span class="role">{{ o.role }}</span><h3>{{ o.name }}</h3><p class="contact">{% if o.email %}{% set at = o.email.split("@") %}<a href="mailto:{{ o.email }}">{{ at[0] }}<wbr>@{{ at[1] }}</a>{% endif %}{% if o.phone %}<a href="tel:+1{{ o.phone | telHref }}">{{ o.phone }}</a>{% endif %}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Board of directors {{ leadership.year }}</span><h2>Board of directors</h2></div>
+      <p>Directors serve staggered terms, grouped here by the year each term ends.</p>
+    </div>
+    <div class="board-terms">
+      {%- for t in leadership.board | byTerm %}
+      <div class="term-group"><h3>Term ends {{ t.year }}</h3><ul>{% for n in t.names %}<li>{{ n }}</li>{% endfor %}</ul></div>
+      {%- endfor %}
+    </div>
+    <p style="margin-top:36px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-line" href="/contact/">Contact the association</a><a class="btn btn-line" href="/about/">About &amp; history</a></p>
+  </div>
+</section>

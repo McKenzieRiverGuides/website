@@ -1,0 +1,114 @@
+---
+title: River conditions
+description: Live McKenzie River flow, water temperature and NOAA forecasts from USGS gauges.
+navKey: river
+permalink: /river-conditions/
+pageCss: river.css
+pageScript: river.js
+---
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>River <em>conditions</em></h1>
+      <p class="status" id="v-updated"><span class="spin sm light" aria-hidden="true"></span>Loading live readings…</p>
+    </div>
+    <div class="now" aria-live="polite">
+      <span class="now-where">McKenzie near Vida, now</span>
+      <div class="now-vals">
+        <div><b id="v-flow">—</b><span>cfs</span></div>
+        <div><b id="v-temp">—</b><span>water</span></div>
+        <div><b id="v-trend">—</b><span>flow, last 24 h</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap rc-grid">
+    <div class="card">
+      <span class="eyebrow">Main gauge</span>
+      <h2>McKenzie near Vida</h2>
+      <small class="updated">USGS gauge 14162500</small>
+      <div class="small">
+        <div><b id="v-height">—</b><span>Gauge height</span></div>
+        <div><b id="v-turb">—</b><span>Turbidity</span></div>
+        <div><b id="v-do">—</b><span>Oxygen</span></div>
+        <div><b id="v-ph">—</b><span>pH</span></div>
+      </div>
+      <p class="note-sm">Turbidity is how cloudy the water is: lower is clearer. <a href="https://waterdata.usgs.gov/monitoring-location/14162500/" target="_blank" rel="noopener">All readings at USGS ↗</a></p>
+    </div>
+
+    <div class="card">
+      <div class="chart-tools">
+        <div class="seg" role="group" aria-label="Reading" id="metric">
+          <button type="button" data-m="00060" aria-pressed="true">Flow</button>
+          <button type="button" data-m="00010" aria-pressed="false">Water temp</button>
+          <button type="button" data-m="00065" aria-pressed="false">Gauge height</button>
+        </div>
+        <div class="seg" role="group" aria-label="Time range" id="range">
+          <button type="button" data-d="1" aria-pressed="false">24 hours</button>
+          <button type="button" data-d="7" aria-pressed="true">7 days</button>
+          <button type="button" data-d="30" aria-pressed="false">30 days</button>
+        </div>
+      </div>
+      <div class="chart-head"><div class="chart-title" id="c-title">Flow near Vida, last 7 days</div>
+        <div class="legend" id="legend" hidden><span><i class="sw obs"></i>Observed (USGS)</span><span><i class="sw fc"></i>NOAA forecast</span></div></div>
+      <div class="chart" id="chart">
+        <div class="chart-msg" id="c-msg"><div><span class="spin" aria-hidden="true"></span>Loading the last 30 days…</div></div>
+        <div class="tip" id="tip"></div>
+      </div>
+      <div class="chart-foot">
+        <span>Observed: USGS (provisional). <span id="fc-issued"></span></span>
+        <a href="https://www.nwrfc.noaa.gov/river/station/flowplot/flowplot.cgi?lid=VIDO3" target="_blank" rel="noopener">NOAA flow forecast for Vida ↗</a>
+      </div>
+      <details class="table">
+        <summary>Show as a table</summary>
+        <table><thead><tr><th id="t-when">Day</th><th>Low</th><th>Average</th><th>High</th></tr></thead><tbody id="t-body"></tbody></table>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Along the river</span><h2>Gauges with a NOAA forecast</h2></div>
+      <p>Listed upstream to downstream. Each line shows the last 7 days of flow, then NOAA’s forecast in orange.</p>
+    </div>
+    <div class="flow-line">Upstream</div>
+    <div class="gauges" id="gauges"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="prose">
+      <span class="eyebrow">From our guides</span>
+      <h2 style="margin-top:12px">Reading the numbers</h2>
+      {% if text.river.reading_the_numbers %}{{ text.river.reading_the_numbers | paras | safe }}{% else %}<p class="lead placeholder-text">Placeholder. A few plain sentences from the guides on what these numbers mean on the McKenzie: what flows are good for fishing, when the river runs high and muddy, and when water temperature matters for the fish.</p>
+      <p class="placeholder-text">Guides will write this section. The site will not make up flow ranges or fishing advice.</p>{% endif %}
+    </div>
+    <aside class="aside-card">
+      <span class="eyebrow">Want local advice?</span>
+      <h3>Ask a professional guide</h3>
+      <p>Our guides are on the McKenzie every week of the season and know how it fishes at every flow.</p>
+      <a class="btn btn-line" href="/find-a-guide/">Find a guide</a>
+    </aside>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Before you go</span><h2>Fishing reports, rules &amp; weather</h2></div>
+      <p>From the agencies that manage the river. Each opens their website.</p>
+    </div>
+    <div class="links">
+      <a class="lk" href="https://myodfw.com/recreation-report/fishing-report/willamette-zone" target="_blank" rel="noopener"><span class="src">ODFW</span><h3>Fishing report</h3><p>Oregon Department of Fish and Wildlife's weekly report for the Willamette zone, which includes the McKenzie.</p><span class="go">Open ↗</span></a>
+      <a class="lk" href="https://myodfw.com/fishing/regulations" target="_blank" rel="noopener"><span class="src">ODFW</span><h3>Fishing regulations</h3><p>Current Oregon sport fishing rules, seasons and any emergency changes.</p><span class="go">Open ↗</span></a>
+      <a class="lk" href="https://www.nwrfc.noaa.gov/river/station/flowplot/flowplot.cgi?lid=VIDO3" target="_blank" rel="noopener"><span class="src">NOAA</span><h3>River forecast</h3><p>Northwest River Forecast Center outlook for the McKenzie near Vida.</p><span class="go">Open ↗</span></a>
+      <a class="lk" href="https://forecast.weather.gov/MapClick.php?lat=44.116&amp;lon=-122.738" target="_blank" rel="noopener"><span class="src">National Weather Service</span><h3>Weather forecast</h3><p>The 7-day forecast for the McKenzie valley.</p><span class="go">Open ↗</span></a>
+    </div>
+    <p class="fine">Readings come straight from the U.S. Geological Survey and are provisional until USGS reviews them. Conditions change quickly. Always check the river yourself before you put in.</p>
+  </div>
+</section>

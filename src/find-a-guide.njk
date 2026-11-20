@@ -1,0 +1,56 @@
+---
+title: Find a Guide
+description: Find a professional McKenzie River fishing guide. Every guide listed is an active member of the McKenzie River Guides Association.
+navKey: guides
+permalink: /find-a-guide/
+pageScript: find-a-guide.js
+---
+{%- set guides = directory.guides -%}
+{%- set allSpecs = guides | allSpecs -%}
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Find a <em>guide</em></h1>
+      <p class="status">Every guide here is an active association member. Contact them directly.</p>
+    </div>
+    <form class="finder-box" role="search" onsubmit="return false">
+      <input type="search" id="q" placeholder="Guide, business or river" aria-label="Search guides by name, business or river" autocomplete="off">
+      <button class="btn btn-cedar" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="dir-tools">
+      <span class="dir-count" id="count" aria-live="polite">{% if guides.length %}{{ guides.length }} active guides{% else %}Loading guides…{% endif %}</span>
+    </div>
+    <!-- Filter chips come from the Specialty column of the sheet (comma-separated). -->
+    <div class="chips" id="chips"{% if not allSpecs.length %} hidden{% endif %}>{% for s in allSpecs %}<button class="chip" type="button" aria-pressed="false">{{ s }}</button>{% endfor %}</div>
+    {% if guides.length -%}
+    <div class="guide-grid" id="grid">{% for g in guides %}{% include "partials/gcard.njk" %}{% endfor %}</div>
+    {%- else -%}
+    <div class="guide-grid skeleton" id="grid"><div class="gcard"></div><div class="gcard"></div><div class="gcard"></div><div class="gcard"></div><div class="gcard"></div><div class="gcard"></div></div>
+    {%- endif %}
+    <script type="application/json" id="guides-data">{{ guides | json | safe }}</script>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap split">
+    <div class="prose">
+      <span class="eyebrow">Before you book</span>
+      <h2 style="margin-top:12px">Choosing a guide</h2>
+      {% if text.guides.choosing_a_guide %}{{ text.guides.choosing_a_guide | paras | safe }}{% else %}<p class="placeholder-text">Placeholder text. A few short tips from the association: what kinds of trips guides offer, when to book, what to bring, and that Oregon guides register with the Oregon State Marine Board. Leah or the board will write this.</p>{% endif %}
+      <h3>Fishing the National Forest McKenzie</h3>
+      <p>Guiding the stretch of the McKenzie inside the Willamette National Forest requires a separate guide permit from the Forest. Guides who hold that permit list <b>National Forest McKenzie</b> in their specialties, so look for it on a guide's listing if you want to fish that water.</p>
+      <p>Guides set their own rates and trips. The association doesn't book trips or take payments.</p>
+    </div>
+    <aside class="aside-card">
+      <span class="eyebrow">For guides</span>
+      <h3>Update your listing</h3>
+      <p>Active member guides can change their business name, website, phone and rivers or trip types. We'll email you a private link.</p>
+      <p style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-cedar" href="/edit-listing/">Edit my listing</a><a class="btn btn-line" href="/join/">Join as a guide</a></p>
+    </aside>
+  </div>
+</section>

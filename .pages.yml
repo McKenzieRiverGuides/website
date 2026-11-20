@@ -1,0 +1,282 @@
+# Pages CMS configuration (https://pagescms.org/docs/configuration/)
+# This is what Leah (and other editors) see at app.pagescms.org. Every save is a commit,
+# and Cloudflare Pages rebuilds the site about a minute later.
+# Guide and member lists are NOT here: they live in the Google Sheet "MRGA Roster – Master".
+
+media:
+  input: src/images
+  output: /images
+
+content:
+  # ---------------------------------------------------------------- News & Stories
+  - name: posts
+    label: News & Stories
+    type: collection
+    path: src/posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, date, author]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Headline
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        description: Posts are listed newest first. The website shows the month and year.
+      - name: author
+        label: Written by
+        type: string
+        default: Leah Helfrich
+      - name: cover
+        label: Cover photo
+        type: image
+        description: Shown on the News page, the homepage and at the top of the post. Use a landscape photo.
+      - name: summary
+        label: Short summary
+        type: text
+        description: One or two sentences for the News page and the homepage.
+      - name: categories
+        label: Categories
+        type: select
+        description: Used for the filter buttons on the News page. Pick one or more, or type a new one.
+        options:
+          multiple: true
+          creatable: true
+          values: ["on the river", "River Management", "Community Event", "Events on the River", "River Clean-up"]
+      - name: tags
+        label: Tags (optional)
+        type: string
+        list: true
+      - name: draft
+        label: Draft (hide from the website)
+        type: boolean
+        default: false
+      - name: imported_from
+        label: Old website address
+        type: string
+        hidden: true
+      - name: body
+        label: Story
+        type: rich-text
+
+  # ---------------------------------------------------------------- Events
+  - name: events
+    label: Events
+    type: collection
+    path: src/events
+    filename: "{primary}.md"
+    description: Annual meeting (second Saturday of January), annual dinner (April) and the Wooden Boat Festival. Shown under "Coming up" on the News page; past dates hide themselves.
+    view:
+      fields: [title, event_date, when]
+      primary: title
+    fields:
+      - name: title
+        label: Event name
+        type: string
+        required: true
+      - name: event_date
+        label: Date
+        type: date
+        description: Leave empty if the date isn't set yet, and fill in "When" instead.
+      - name: when
+        label: When (if no date yet)
+        type: string
+        description: For example "April 2027, date to come".
+      - name: time
+        label: Time (optional)
+        type: string
+      - name: place
+        label: Place
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: order
+        label: Order (for events without a date)
+        type: number
+        hidden: true
+
+  # ---------------------------------------------------------------- Newsletter archive
+  - name: newsletters
+    label: Newsletters
+    type: collection
+    path: src/newsletters
+    filename: "{year}-{month}-{primary}.md"
+    description: Past newsletter issues. The "Past newsletters" links appear on the website automatically once the first issue is added here. Only public newsletters; never private member emails.
+    view:
+      fields: [title, date]
+      primary: title
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: For example "Spring 2027 newsletter".
+      - name: date
+        label: Date sent
+        type: date
+        required: true
+      - name: contents
+        label: What's inside (one line)
+        type: string
+        description: For example "Season plan · Annual dinner".
+      - name: draft
+        label: Draft (hide from the website)
+        type: boolean
+        default: false
+      - name: body
+        label: Newsletter
+        type: rich-text
+
+  # ---------------------------------------------------------------- Homepage festival block
+  - name: festival
+    label: Wooden Boat Festival (homepage)
+    type: file
+    path: src/_data/festival.json
+    format: json
+    description: Update once a year when Oregon's Boat announces the festival.
+    fields:
+      - name: poster
+        label: Poster preview
+        type: image
+        description: "Small preview only, at most 400 pixels wide. Oregon's Boat sells the poster: never upload the full-size file."
+      - name: poster_alt
+        label: Poster description (for screen readers)
+        type: string
+      - name: poster_is_current
+        label: This is this year's poster
+        type: boolean
+      - name: date
+        label: Date
+        type: string
+        description: For example "Saturday, April 24, 2027, 10 a.m. to 4 p.m."
+      - name: place
+        label: Place
+        type: string
+      - name: admission
+        label: Admission
+        type: string
+      - name: details_url
+        label: Festival details link (Oregon's Boat)
+        type: string
+      - name: poster_shop_url
+        label: Buy the poster link (Oregon's Boat)
+        type: string
+
+  # ---------------------------------------------------------------- Leadership
+  - name: leadership
+    label: Officers & board
+    type: file
+    path: src/_data/leadership.json
+    format: json
+    fields:
+      - name: year
+        label: Year shown on the page
+        type: string
+      - name: officers
+        label: Officers
+        type: object
+        list: true
+        fields:
+          - { name: role, label: Role, type: string }
+          - { name: name, label: Name, type: string }
+          - { name: email, label: Email, type: string }
+          - { name: phone, label: Phone, type: string }
+          - { name: photo, label: Photo (square), type: image }
+      - name: board
+        label: Board of directors
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: term_ends, label: Term ends (year), type: string }
+
+  # ---------------------------------------------------------------- Page text
+  - name: text-home
+    label: "Page text: Homepage"
+    type: file
+    path: src/_data/text/home.json
+    format: json
+    description: Empty boxes show grey placeholder text on the website until you fill them in. Leave a blank line between paragraphs.
+    fields:
+      - { name: hero_intro, label: Intro under the big headline, type: text }
+      - { name: who_we_are, label: "Who we are", type: text }
+      - { name: film_text, label: "Drift boat film: text", type: text }
+      - { name: film_url, label: "Drift boat film: link to the full film (YouTube)", type: string }
+      - { name: band_line, label: Line on the river photo band, type: string }
+
+  - name: text-about
+    label: "Page text: About & history"
+    type: file
+    path: src/_data/text/about.json
+    format: json
+    description: Empty boxes show grey placeholder text on the website until you fill them in. Leave a blank line between paragraphs.
+    fields:
+      - { name: lead, label: "Who we are: first paragraph", type: text }
+      - { name: body, label: "Who we are: more text", type: text }
+      - { name: conservation, label: "Conservation: a sentence or two", type: text }
+      - { name: stewardship, label: "Stewardship: a sentence or two", type: text }
+      - { name: access, label: "River access: a sentence or two", type: text }
+      - name: timeline
+        label: History timeline
+        type: object
+        list: true
+        description: Confirmed facts only, oldest first.
+        fields:
+          - { name: year, label: Year, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+
+  - name: text-join
+    label: "Page text: Join"
+    type: file
+    path: src/_data/text/join.json
+    format: json
+    description: Empty boxes show grey placeholder text on the website until you fill them in.
+    fields:
+      - { name: associate_dues, label: "Associate dues (e.g. $25)", type: string }
+      - { name: guide_dues, label: "Guide dues (e.g. $100)", type: string }
+      - { name: associate_apply_url, label: "Apply as an associate: link (optional, otherwise it opens an email)", type: string }
+      - { name: guide_apply_url, label: "Apply as a guide: link (optional, otherwise it opens an email)", type: string }
+      - { name: how_to_apply, label: How to apply and pay dues, type: text }
+      - { name: renewal, label: "Answer: When do memberships renew?", type: text }
+
+  - name: text-guides
+    label: "Page text: Find a Guide"
+    type: file
+    path: src/_data/text/guides.json
+    format: json
+    fields:
+      - { name: choosing_a_guide, label: "Choosing a guide: tips", type: text }
+
+  - name: text-river
+    label: "Page text: River conditions"
+    type: file
+    path: src/_data/text/river.json
+    format: json
+    fields:
+      - { name: reading_the_numbers, label: "Reading the numbers (written by the guides)", type: text }
+
+  # ---------------------------------------------------------------- Site settings
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/_data/settings.json
+    format: json
+    description: Contact details used across the website.
+    fields:
+      - { name: email, label: Public email address, type: string }
+      - { name: facebook_url, label: Facebook page link, type: string }
+      - { name: foundation_url, label: McKenzie Guides Foundation website, type: string, description: "Once filled in, every \"Support the river\" and Foundation button goes straight there." }
+      - { name: mailing_address, label: Mailing address, type: text }

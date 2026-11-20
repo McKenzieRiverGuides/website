@@ -1,0 +1,35 @@
+---
+title: Members & supporters
+description: Retired guides and associate members of the McKenzie River Guides Association.
+navKey: members
+permalink: /members/
+pageScript: members.js
+---
+{%- set retired = directory.members | memberGroup("retired") -%}
+{%- set assoc = directory.members | memberGroup("associate") -%}
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Members &amp; <em>supporters</em></h1>
+      <p class="status">Retired guides and associate members who keep the association going.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div id="lists">{% if directory.members.length -%}
+      {% if retired.length %}<div class="name-group"><span class="eyebrow">{{ retired.length }} retired guides</span><h2>Retired guides</h2><p>Guides who spent their careers on the McKenzie and remain part of the association.</p>{{ retired | nameList(false) | safe }}</div>{% endif %}
+      <div class="name-group"><span class="eyebrow">{{ assoc.length }} associate members</span><h2>Associate members</h2><p>Friends of the river who support the association. Thank you.</p>{{ assoc | nameList(true) | safe }}</div>
+    {%- else %}<p class="dir-count">Loading members…</p>{% endif %}</div>
+    <script type="application/json" id="members-data">{{ directory.members | json | safe }}</script>
+    <a class="foundation" href="/join/" style="margin-top:8px">
+      <div>
+        <span class="eyebrow">Associate membership</span>
+        <h3>Add your name to the list</h3>
+        <p>Associate members are friends of the river, often our guides' clients, who join the association and support its work. New members are voted in at the annual meeting.</p>
+      </div>
+      <span class="btn btn-line">Become a member</span>
+    </a>
+  </div>
+</section>

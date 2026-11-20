@@ -1,0 +1,6 @@
+# Cloudflare Pages response headers.
+# CSS/JS links carry a ?v= tag that changes every build, so they can be cached for a long time.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=86400

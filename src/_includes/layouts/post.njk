@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+navKey: news
+darkHead: true
+---
+{#- One News & Stories post (also used for newsletter issues). The cover photo shows on top unless the text already starts with it. -#}
+<article>
+  <header class="article-head">
+    <div class="wrap" style="max-width:860px">
+      <div class="crumbs"><a href="/">Home</a> / <a href="/news/">News &amp; Stories</a></div>
+      <span class="eyebrow">{% if isNewsletter %}Newsletter{% elif categories and categories.length %}{{ categories[0] }}{% else %}News{% endif %}</span>
+      <h1>{{ title }}</h1>
+      <div class="byline"><time datetime="{{ page.date | isoDate }}">{{ page.date | monthYear }}</time>{% if author %}<span>·</span><span>By {{ author }}</span>{% endif %}</div>
+    </div>
+  </header>
+  {%- if cover and not (cover in content) %}
+  <figure class="article-hero">
+    <img src="{{ cover }}" alt="{{ cover_alt or '' }}">
+    {% if cover_caption %}<figcaption>{{ cover_caption }}</figcaption>{% endif %}
+  </figure>
+  {%- endif %}
+  <div class="article-body wrap">
+    <div class="prose">
+{{ content | safe }}
+    </div>
+    <div class="share"><a href="/news/">← All news &amp; stories</a>{% if collections.newsletters.length %}<a href="/news/#newsletters">Past newsletters</a>{% endif %}</div>
+  </div>
+</article>

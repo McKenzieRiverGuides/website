@@ -1,0 +1,105 @@
+---
+title: About & history
+description: The McKenzie River Guides Association was founded in 1931 for conservation, stewardship and access to the McKenzie River.
+navKey: about
+permalink: /about/
+---
+{%- set t = text.about -%}
+<div class="page-hero photo">
+  <img class="bg" src="/images/history/early-guides.webp" width="2000" height="710" alt="" style="object-position:45% 50%">
+  <div class="shade"></div>
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Home</a> / About</div>
+    <span class="eyebrow">About the association</span>
+    <h1>Guiding the McKenzie <em>since 1931</em></h1>
+    <p class="lede">Founded in 1931 for conservation, stewardship and access to the river.</p>
+  </div>
+  <span class="cap">Early McKenzie River guides and their drift boats</span>
+</div>
+
+<section>
+  <div class="wrap split">
+    <div class="prose">
+      <span class="eyebrow">Who we are</span>
+      <h2 style="margin-top:12px">Stewards of the river we make our living on</h2>
+      {% if t.lead %}{{ t.lead | paras("lead") | safe }}{% else %}<p class="lead placeholder-text">Placeholder introduction. A short, plain statement of who the association is: professional guides on the McKenzie and the members who support them.</p>{% endif %}
+      {% if t.body %}{{ t.body | paras | safe }}{% else %}<p class="placeholder-text">Placeholder text. What the association does today: work on conservation of native fish and clean water, care for the river and its landings, and keeping the McKenzie open to everyone. Leah or the board will replace this with the real story.</p>{% endif %}
+    </div>
+    <aside class="aside-card">
+      <span class="eyebrow">At a glance</span>
+      <dl>
+        <div><dt>Founded</dt><dd>1931</dd></div>
+        <div><dt>Organization</dt><dd>501(c)(4) membership association</dd></div>
+        <div><dt>Home water</dt><dd>McKenzie River, Oregon, birthplace of the drift boat</dd></div>
+        <div><dt>Members</dt><dd>Professional guides, retired guides and associate members</dd></div>
+      </dl>
+      <p style="margin:16px 0 0"><a class="btn btn-line" href="/members/">See our members</a></p>
+    </aside>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">What we stand for</span><h2>Three commitments since 1931</h2></div></div>
+    <div class="pillars">
+      <div class="pillar"><h3>Conservation</h3><p>Healthy native fish and clean water. {% if t.conservation %}{{ t.conservation }}{% else %}<span class="placeholder-text">A sentence or two on current conservation work goes here.</span>{% endif %}</p></div>
+      <div class="pillar"><h3>Stewardship</h3><p>Caring for the river and its landings. {% if t.stewardship %}{{ t.stewardship }}{% else %}<span class="placeholder-text">A sentence or two on stewardship projects goes here.</span>{% endif %}</p></div>
+      <div class="pillar"><h3>River access</h3><p>Keeping the McKenzie open to all. {% if t.access %}{{ t.access }}{% else %}<span class="placeholder-text">A sentence or two on access work goes here.</span>{% endif %}</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Our history</span><h2>Nearly a century on the McKenzie</h2></div>
+    </div>
+    <ol class="timeline">
+      {%- for m in t.timeline %}
+      <li class="confirmed"><span class="yr">{{ m.year }}</span><div><h3>{{ m.title }}</h3>{% if m.text %}<p>{{ m.text }}</p>{% endif %}</div></li>
+      {%- endfor %}
+      {%- if t.timeline.length < 4 %}
+      <li><span class="yr">19__</span><div><h3>More milestones to come <span class="sample">Placeholder</span></h3><p>The early drift-boat era, river projects, the Wooden Boat Festival or the Oregon's Boat film. The board will add these.</p></div></li>
+      {%- endif %}
+    </ol>
+    <div class="photo-row" style="margin-top:28px">
+      <div class="ph"><span class="ph-label">Historic photo (to come)</span></div>
+      <div class="ph"><span class="ph-label">Historic photo</span></div>
+      <div class="ph"><span class="ph-label">Historic photo</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="boat" id="drift-boat">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Our heritage</span>
+      <h2>McKenzie, birthplace of the <em>drift boat</em></h2>
+      <p>The drift boat was born on this river. Two places to see its story today, both from our friends at the nonprofit Oregon's Boat.</p>
+    </div>
+    <div class="boat-links">
+      <a class="boat-link" href="/#film">
+        <span class="eyebrow">Documentary</span>
+        <h3>Oregon's Boat, the film</h3>
+        <p>The story of the McKenzie drift boat. Watch the trailer on our homepage; the full film is on the Oregon's Boat YouTube channel.</p>
+        <span class="go">Watch the trailer →</span>
+      </a>
+      <a class="boat-link" href="/#festival">
+        <span class="eyebrow">Every year</span>
+        <h3>McKenzie River Wooden Boat Festival</h3>
+        <p>A celebration of wooden boats, organized by Oregon's Boat and sponsored by the association.</p>
+        <span class="go">This year's festival →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Leadership</span><h2>Officers &amp; board</h2></div>
+      <p>The association is led by guides elected by the membership.</p>
+    </div>
+    <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-line" href="/leadership/">Meet our officers &amp; board</a><a class="btn btn-line" href="/contact/">Contact the association</a></p>
+  </div>
+</section>

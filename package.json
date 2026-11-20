@@ -1,0 +1,18 @@
+{
+  "name": "mrga-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "McKenzie River Guides Association website (Eleventy, deployed on Cloudflare Pages, edited in Pages CMS)",
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve --port=8768",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8"
+  }
+}

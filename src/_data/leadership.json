@@ -1,0 +1,21 @@
+{
+  "year": "2026",
+  "officers": [
+    { "role": "President", "name": "Ty Holloway", "email": "holloway.ty88@gmail.com", "phone": "541-729-0692", "photo": "/images/leadership/ty-holloway.jpg" },
+    { "role": "President Elect", "name": "Clay Holloway", "email": "claytonholloway14@yahoo.com", "phone": "541-729-0692", "photo": "/images/leadership/clay-holloway.jpg" },
+    { "role": "Past President", "name": "Ethan Nickel", "email": "enickeloutfitters@gmail.com", "phone": "541-554-2303", "photo": "/images/leadership/ethan-nickel.jpg" },
+    { "role": "Secretary-Treasurer", "name": "Leah Helfrich", "email": "leahlouisehelfrich@gmail.com", "phone": "541-221-5186", "photo": "/images/leadership/leah-helfrich.jpg" }
+  ],
+  "board": [
+    { "name": "Chris Wright", "term_ends": "2026" },
+    { "name": "Steve Mealey", "term_ends": "2027" },
+    { "name": "Kyle Duke", "term_ends": "2027" },
+    { "name": "Clay Holloway", "term_ends": "2027" },
+    { "name": "Dana Burwell", "term_ends": "2027" },
+    { "name": "Jeff Helfrich", "term_ends": "2028" },
+    { "name": "Jason Mitzner", "term_ends": "2028" },
+    { "name": "Gene Jones", "term_ends": "2028" },
+    { "name": "Tom Hoyt", "term_ends": "2028" },
+    { "name": "Matt Ramsey", "term_ends": "2028" }
+  ]
+}

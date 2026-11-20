@@ -1,0 +1,183 @@
+---
+layout: layouts/home.njk
+isHome: true
+navKey: home
+permalink: /
+---
+{%- set t = text.home -%}
+{%- set latest = collections.posts[0] -%}
+<div class="hero hero-hist">
+  <!-- Hero slideshow: add up to ~6 historic photos here (first one loads right away, the rest load later).
+       data-cap = caption, data-pos = which part of the photo stays in view when cropped. -->
+  <div class="hist-wrap" aria-hidden="true">
+    <img class="hist-photo on" src="/images/history/early-guides.webp" width="2000" height="710" alt="" fetchpriority="high"
+         data-cap="Early McKenzie River guides and their drift boats" data-pos="45% 50%">
+    <!-- Stand-ins until more historic photos arrive -->
+    <img class="hist-photo" data-src="/images/hero-bg.jpg" width="1000" height="288" alt=""
+         data-cap="A McKenzie River redside" data-pos="55% 50%">
+    <img class="hist-photo" data-src="/images/video/boat-parade-still.jpg" width="1280" height="720" alt=""
+         data-cap="Wooden boats on the McKenzie" data-pos="50% 50%">
+    <div class="hist-grain"></div><div class="hist-scratch"></div><div class="hist-vignette"></div>
+  </div>
+  <div class="hero-shade"></div>
+  <span class="hist-cap" id="histCap">Early McKenzie River guides and their drift boats</span>
+  <button class="vid-toggle" id="heroToggle" type="button" aria-label="Pause slideshow" hidden>❚❚</button>
+  <div class="wrap hero-row">
+  <div class="hero-inner">
+    <span class="eyebrow">McKenzie River, Oregon</span>
+    <h1>Guiding the McKenzie <em>since 1931</em></h1>
+    <p>{{ t.hero_intro }}</p>
+    <div class="hero-ctas">
+      <a class="btn btn-cedar" href="/find-a-guide/">Find a guide</a>
+      {#- Until the McKenzie Guides Foundation website exists, go to the top of Join (all three ways to support fit on one screen). #}
+      {% if settings.foundation_url %}<a class="btn btn-ghost" href="{{ settings.foundation_url }}" target="_blank" rel="noopener">Support the river <span aria-hidden="true">↗</span></a>{% else %}<a class="btn btn-ghost" href="/join/">Support the river</a>{% endif %}
+    </div>
+  </div>
+  {% if latest -%}
+  <a class="latest" href="{{ latest.url }}">
+    <span class="latest-tag">Latest from the river</span>
+    <div class="latest-body">
+      {% if latest.data.cover %}<img class="latest-img cover" src="{{ latest.data.cover }}" alt="" width="76" height="76">{% else %}<div class="ph latest-img"></div>{% endif %}
+      <div>
+        <h3>{{ latest.data.title }}</h3>
+        <span class="latest-meta">{{ latest.date | monthYear }} · Read the story →</span>
+      </div>
+    </div>
+    <span class="latest-all">All news &amp; stories</span>
+  </a>
+  {%- endif %}
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="cell"><b>1931</b><span>Year founded</span></div>
+    <div class="cell"><b data-count="Guides">{{ directory.guides.length or "Active" }}</b><span>Active guides</span></div>
+    <div class="cell"><b data-count="Members">{{ directory.members.length or "Associate" }}</b><span>Members &amp; supporters</span></div>
+    <div class="cell"><b>Birthplace</b><span>of McKenzie guiding &amp; the drift boat</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap intro">
+    <div>
+      <span class="eyebrow">Who we are</span>
+      <h2>Stewards of the river we make our living on</h2>
+    </div>
+    <div>
+      {% if t.who_we_are %}{{ t.who_we_are | paras | safe }}{% else %}<p>Placeholder history text. The McKenzie River Guides Association was founded in 1931 to protect the river, care for its fish and keep it open to everyone. Leah or the board will replace this with the real story.</p>{% endif %}
+      <div class="pillars">
+        <div class="pillar"><h3>Conservation</h3><p>Healthy native fish and clean water.</p></div>
+        <div class="pillar"><h3>Stewardship</h3><p>Caring for the river and its landings.</p></div>
+        <div class="pillar"><h3>River access</h3><p>Keeping the McKenzie open to all.</p></div>
+      </div>
+      <p style="margin-top:30px"><a class="btn btn-line" href="/about/">Our history</a></p>
+    </div>
+    <figure class="history-photo">
+      <div class="ph" style="aspect-ratio:2.8/1;border-radius:4px"><span class="ph-label">Second historic photo (to come)</span></div>
+    </figure>
+  </div>
+</section>
+
+<section class="film" id="film">
+  <div class="wrap film-grid">
+    <div class="video ph"><span class="play" aria-hidden="true"></span><span class="ph-label">Trailer: Jayson in Marten Rapids (to come)</span></div>
+    <div>
+      <span class="eyebrow">The McKenzie drift boat</span>
+      <h2>A boat built for this river</h2>
+      {% if t.film_text %}{{ t.film_text | paras | safe }}{% else %}<p>Placeholder text about the McKenzie drift boat and the documentary. The full film plays on the Oregon's Boat YouTube channel.</p>{% endif %}
+      {% if t.film_url %}<a class="btn btn-cedar" href="{{ t.film_url }}" target="_blank" rel="noopener">Watch the full film <span aria-hidden="true">↗</span></a>{% else %}<span class="btn btn-cedar" aria-disabled="true">Full film link to come</span>{% endif %}
+    </div>
+  </div>
+</section>
+
+{%- set f = festival %}
+<section class="festival has-video" id="festival">
+  <video class="fest-video" id="festVideo" muted loop playsinline preload="none" poster="/images/video/boat-parade-still.jpg" aria-hidden="true">
+    <source data-src="/images/video/boat-parade-960.mp4" type="video/mp4" media="(max-width: 800px)">
+    <source data-src="/images/video/boat-parade-1280.mp4" type="video/mp4">
+  </video>
+  <div class="fest-shade"></div>
+  <button class="vid-toggle" id="vidToggle" type="button" aria-label="Pause background video">❚❚</button>
+  <div class="wrap fest-grid">
+    {#- Poster rule: Oregon's Boat sells the poster. Only a low-res preview (max 400px wide), no download or full-size link. #}
+    <div class="poster" oncontextmenu="return false">
+      <img src="{{ f.poster }}" width="400" height="600" loading="lazy" draggable="false" alt="{{ f.poster_alt }}">
+      <span class="poster-note">Poster © Oregon's Boat</span>
+    </div>
+    <div>
+      <span class="eyebrow">Annual event</span>
+      <h2>McKenzie River Wooden Boat Festival</h2>
+      <p>A yearly celebration of the McKenzie's wooden boats, organized by the nonprofit Oregon's Boat and sponsored by the McKenzie River Guides Association.</p>
+      <dl class="fest-facts">
+        <div><dt>Date</dt><dd>{% if f.date %}{{ f.date }}{% else %}This year's date <span class="sample">To come</span>{% endif %}</dd></div>
+        <div><dt>Place</dt><dd>{{ f.place or "This year's location" }}</dd></div>
+        <div><dt>Admission</dt><dd>{{ f.admission or "This year's details" }}</dd></div>
+      </dl>
+      <div class="fest-ctas">
+        <a class="btn btn-cedar" href="{{ f.details_url }}" target="_blank" rel="noopener">Festival details <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-line" href="{{ f.poster_shop_url }}" target="_blank" rel="noopener">Buy the poster from Oregon's Boat <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap two">
+    <div id="conditions">
+      <div class="gauge">
+        <span class="eyebrow">River conditions</span>
+        <h3>McKenzie near Vida</h3>
+        <small id="g-updated"><span class="spin sm" aria-hidden="true"></span>Loading live readings…</small>
+        <div class="read">
+          <div><b id="g-flow">—</b><span>Flow (cfs)</span></div>
+          <div><b id="g-temp">—</b><span>Water temp</span></div>
+          <div><b id="g-height">—</b><span>Gauge height</span></div>
+        </div>
+        <div class="spark-wrap" id="g-spark-wrap"><span class="spin" aria-hidden="true"></span><svg class="spark" id="g-spark" viewBox="0 0 300 56" width="100%" preserveAspectRatio="none" role="img" aria-label="Flow over the last 7 days"><path fill="none" stroke="#2d5a55" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+        <small class="spark-cap">Flow, last 7 days · <a href="https://waterdata.usgs.gov/monitoring-location/14162500/" target="_blank" rel="noopener">USGS data ↗</a></small>
+        <a class="btn btn-line" href="/river-conditions/">All gauges &amp; fishing reports</a>
+      </div>
+    </div>
+    <div>
+      <div class="sec-head" style="margin-bottom:20px">
+        <div><span class="eyebrow">News &amp; Stories</span><h2>From the river</h2></div>
+        <a class="btn btn-line" href="/news/">All news &amp; stories</a>
+      </div>
+      <div class="news-list">
+        {%- for p in collections.posts | head(3) %}
+        <a class="post" href="{{ p.url }}">{% if p.data.cover %}<img class="cover" src="{{ p.data.cover }}" alt="" loading="lazy">{% else %}<div class="ph"></div>{% endif %}<div><time datetime="{{ p.date | isoDate }}">{{ p.date | monthYear }}</time><h3>{{ p.data.title }}</h3>{% if p.data.summary %}<p>{{ p.data.summary | truncate(160) }}</p>{% endif %}</div></a>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap"><h2>{{ t.band_line }}</h2></div>
+</div>
+
+<section id="join">
+  <div class="wrap join">
+    <div class="join-card a">
+      <span class="eyebrow" style="color:#fbe1c8">Associate members</span>
+      <h3>Support the McKenzie</h3>
+      <p>Associate members are friends of the river (often our guides' clients) who join the association and back its work for conservation and river access.</p>
+      <a class="btn" href="/join/">Become an associate member</a>
+    </div>
+    <div class="join-card b">
+      <span class="eyebrow">For guides</span>
+      <h3>Join as a guide</h3>
+      <p>Professional guides on the McKenzie can join with two active-guide sponsors and a current Oregon Marine Board license. New members are voted in at the annual meeting.</p>
+      <a class="btn btn-line" href="/join/">How to join</a>
+    </div>
+    <a class="foundation" href="{{ settings.foundation_url or '/join/#give' }}"{% if settings.foundation_url %} target="_blank" rel="noopener"{% endif %}>
+      <div>
+        <span class="eyebrow">Tax-deductible giving</span>
+        <h3>Give through the McKenzie Guides Foundation</h3>
+        <p>MRGA is a 501(c)(4) membership association, so payments to MRGA aren't tax-deductible as charitable donations. The McKenzie Guides Foundation is a separate 501(c)(3) that accepts tax-deductible donations.</p>
+      </div>
+      <span class="btn btn-line">{% if settings.foundation_url %}Visit the Foundation <span aria-hidden="true">↗</span>{% else %}Ways to give{% endif %}</span>
+    </a>
+  </div>
+</section>

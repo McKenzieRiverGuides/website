@@ -1,0 +1,77 @@
+---
+title: Edit your listing
+description: Active member guides can update their Find a Guide listing.
+navKey: guides
+permalink: /edit-listing/
+pageScript: edit-listing.js
+---
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Edit your <em>listing</em></h1>
+      <p class="status">Keep your Find a Guide card up to date. Changes go live within a few minutes.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+
+    <!-- Step 1: ask for a link -->
+    <div class="edit-grid" id="stepRequest">
+      <form class="panel" id="requestForm" novalidate>
+        <span class="eyebrow">Step 1</span>
+        <h2>Get your private edit link</h2>
+        <p>Enter the email address the association has on file for you. We'll send a link that opens your listing and works for one hour.</p>
+        <div id="requestMsg"></div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" autocomplete="email" required>
+        </div>
+        <div class="form-actions"><button class="btn btn-cedar" type="submit">Email me a link</button></div>
+      </form>
+      <aside class="aside-card">
+        <span class="eyebrow">Good to know</span>
+        <h3>Only you can edit your card</h3>
+        <p>The link goes only to the email on your roster record, and it opens only your own listing.</p>
+        <p>Your name, membership status and private details are kept by the secretary. To change those, or if your email has changed, contact the secretary.</p>
+      </aside>
+    </div>
+
+    <!-- Step 2: edit -->
+    <div class="edit-grid" id="stepEdit" hidden>
+      <form class="panel" id="editForm" novalidate>
+        <span class="eyebrow">Your listing</span>
+        <h2 id="editName">Your name</h2>
+        <p>Your name is set by the secretary. Everything else below is yours to change.</p>
+        <div id="editMsg"></div>
+        <div class="field">
+          <label for="f-business">Business name</label>
+          <input type="text" id="f-business" maxlength="80" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="f-link">Website or Facebook page</label>
+          <input type="url" id="f-link" maxlength="200" placeholder="https://" inputmode="url">
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone for clients</label>
+          <input type="tel" id="f-phone" maxlength="30" autocomplete="tel" placeholder="541-555-0123">
+        </div>
+        <fieldset class="field">
+          <legend>Rivers and trip types</legend>
+          <span class="hint">Pick any that apply. Choose National Forest McKenzie only if you hold the Willamette National Forest guide permit.</span>
+          <div class="checks" id="f-specialty"></div>
+        </fieldset>
+        <div class="form-actions">
+          <button class="btn btn-cedar" type="submit" id="saveBtn">Save changes</button>
+          <a class="btn btn-line" href="/find-a-guide/">See Find a Guide</a>
+        </div>
+      </form>
+      <div>
+        <p class="preview-label">Preview</p>
+        <article class="gcard" id="preview"></article>
+      </div>
+    </div>
+
+  </div>
+</section>

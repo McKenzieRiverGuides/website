@@ -1,0 +1,32 @@
+{#- Shared site header + phone menu. navKey marks the current page; the homepage has no "Home" link (isHome). -#}
+{%- set nav = [
+  ["home", "Home", "/"],
+  ["leadership", "Leadership", "/leadership/"],
+  ["guides", "Find a Guide", "/find-a-guide/"],
+  ["news", "News &amp; Stories", "/news/"],
+  ["river", "River", "/river-conditions/"]
+] -%}
+{#- Hidden for now (see AGENTS.md): Conservation (after launch), Drift Boat (story lives on About). -#}
+{%- set links -%}
+{%- for n in nav -%}{%- if not (isHome and n[0] == "home") -%}
+<li><a href="{{ n[2] }}"{% if n[0] == navKey %} aria-current="page"{% endif %}>{{ n[1] | safe }}</a></li>
+{%- endif -%}{%- endfor -%}
+{%- endset -%}
+{%- set joinBtn -%}<a class="btn btn-cedar" href="/join/"{% if navKey == "join" %} aria-current="page"{% endif %}>Join</a>{%- endset -%}
+<header class="site-head{% if darkHead %} dark{% endif %}">
+  <div class="wrap head-row">
+    <a class="logo" href="/">
+      <img class="logo-mark" src="/images/logo/mrga-logo-badge.png" width="1620" height="796" alt="McKenzie River Guides logo, celebrating 95 years, 1931 to 2026">
+      <script>/* Anniversary logo through 2026; everyday round logo from 2027 (?year=2027 previews it). */
+      (function(){var y=+(new URLSearchParams(location.search).get("year"))||new Date().getFullYear();
+      if(y>=2027){var i=document.currentScript.previousElementSibling;i.src="/images/logo/mrga-logo.svg";i.className="logo-mark round";i.width=i.height=1820;i.alt="McKenzie River Guides logo, organized 1931";}})();</script>
+      <span class="logo-text">McKenzie River<br>Guides Association</span>
+    </a>
+    <ul class="nav">{{ links | safe }}<li>{{ joinBtn | safe }}</li></ul>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menuPanel">Menu</button>
+  </div>
+</header>
+<nav class="menu-panel" id="menuPanel" aria-label="Site menu">
+  <ul>{{ links | safe }}<li><a href="/members/"{% if navKey == "members" %} aria-current="page"{% endif %}>Members &amp; supporters</a></li><li><a href="/contact/"{% if navKey == "contact" %} aria-current="page"{% endif %}>Contact</a></li></ul>
+  {{ joinBtn | safe }}
+</nav>

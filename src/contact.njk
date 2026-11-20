@@ -1,0 +1,72 @@
+---
+title: Contact
+description: Contact the McKenzie River Guides Association.
+navKey: contact
+permalink: /contact/
+---
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Contact the <em>association</em></h1>
+      <p class="status">Most questions have a quick answer below. For anything else, <a href="#write">write to us</a>.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap split">
+    <div>
+      <div class="sec-head"><div><span class="eyebrow">Where to start</span><h2>What can we help with?</h2></div></div>
+      <div class="routes">
+        <a class="route" href="/find-a-guide/">
+          <span class="eyebrow">Fishing or floating</span>
+          <h3>Book a guided trip</h3>
+          <p>Contact a guide directly. Every guide in Find a Guide is an active member of the association.</p>
+          <span class="go">Find a guide →</span>
+        </a>
+        <a class="route" href="/join/">
+          <span class="eyebrow">Membership</span>
+          <h3>Join or renew</h3>
+          <p>Associate members support the river; guides need two sponsors and a Marine Board license.</p>
+          <span class="go">How to join →</span>
+        </a>
+        <a class="route" href="/edit-listing/">
+          <span class="eyebrow">For our guides</span>
+          <h3>Update your listing</h3>
+          <p>Change your business, website, phone or specialties yourself. We'll email you a sign-in link.</p>
+          <span class="go">Edit my listing →</span>
+        </a>
+        <a class="route" href="/river-conditions/">
+          <span class="eyebrow">Planning a day out</span>
+          <h3>River conditions</h3>
+          <p>Live flow, water temperature and the NOAA forecast from gauges up and down the McKenzie.</p>
+          <span class="go">Check the river →</span>
+        </a>
+        <a class="route" href="/#festival">
+          <span class="eyebrow">Every year</span>
+          <h3>Wooden Boat Festival</h3>
+          <p>Organized by Oregon's Boat and sponsored by the association. Festival questions go to Oregon's Boat.</p>
+          <span class="go">This year's festival →</span>
+        </a>
+        <a class="route" href="{{ settings.foundation_url or '/join/#give' }}"{% if settings.foundation_url %} target="_blank" rel="noopener"{% endif %}>
+          <span class="eyebrow">Tax-deductible giving</span>
+          <h3>Give to the river</h3>
+          <p>Gifts go to the McKenzie Guides Foundation, a separate 501(c)(3). MRGA dues aren't deductible.</p>
+          <span class="go">Ways to give →</span>
+        </a>
+      </div>
+    </div>
+
+    <aside class="aside-card" id="write">
+      <span class="eyebrow">Write to us</span>
+      <h3>The association secretary</h3>
+      <p>Questions about the association, membership, events or this website. We're volunteers, so give us a few days to reply.</p>
+      <a class="btn btn-cedar" href="mailto:{{ settings.email }}">Email the association</a>
+      <dl style="margin-top:22px">
+        <div><dt>Email</dt><dd><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></dd></div>
+        <div><dt>Facebook</dt><dd>{% if settings.facebook_url %}<a href="{{ settings.facebook_url }}" target="_blank" rel="noopener">McKenzie River Guides Association ↗</a>{% else %}<span class="placeholder-text">Link to come.</span>{% endif %}</dd></div>
+        <div><dt>Mailing address</dt>{% if settings.mailing_address %}<dd>{{ settings.mailing_address | escape | replace("\n", "<br>") | safe }}</dd>{% else %}<dd class="placeholder-text">Mailing address to come.</dd>{% endif %}</div>
+      </dl>
+    </aside>
+  </div>
+</section>
