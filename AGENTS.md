@@ -14,13 +14,13 @@ Nothing private ever goes in this repository. It may be public and it is exactly
 - **Pages CMS** (app.pagescms.org) is the editor for the secretary (Leah Helfrich) and other
   non-technical editors. Its configuration is `.pages.yml`. Every save is a commit → automatic rebuild.
 - **Guide and member directories** are NOT in this repo. They live in Google Sheets owned by
-  mckenzieguides@gmail.com (private "MRGA Roster – Master" → public "MRGA Directory – Public (website)",
+  the association Google account (private "MRGA Roster – Master" → public "MRGA Directory – Public (website)",
   which has public columns only). The build reads the public sheet (gviz CSV) and bakes the lists into
   the pages; the browser then refreshes them quietly from the live sheet.
 - **Guides edit their own card** through `/edit-listing/`, which talks to the "MRGA Guide Editor"
-  Apps Script web app (in mckenzieguides@gmail.com). Changes go live right away; admins monitor.
+  Apps Script web app (in the association Google account). Changes go live right away; admins monitor.
 - All accounts (GitHub organization, Cloudflare, Google, email tool) belong to the association
-  (master login mckenzieguides@gmail.com) with at least two people who can get in. People use their own
+  (master login: the association Google account) with at least two people who can get in. People use their own
   logins as invited members. Never put passwords, API keys or tokens in this repo.
 
 ## Commands

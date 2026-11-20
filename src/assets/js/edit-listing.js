@@ -1,4 +1,4 @@
-/* Edit your listing: talks to the "MRGA Guide Editor" Apps Script web app (mckenzieguides@gmail.com).
+/* Edit your listing: talks to the "MRGA Guide Editor" Apps Script web app.
    The emailed link only opens on pages listed in that script's EDIT_PAGES allowlist (see AGENTS.md).
    ?demo shows the editor with a made-up guide so the page can be checked without signing in. */
 var EDITOR_API = "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJOhQcTnpocAAtFQa8vMQlH2jJge_zvlLEeplJOLdWuE_TI/exec";
