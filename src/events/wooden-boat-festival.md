@@ -1,6 +1,7 @@
 ---
 title: McKenzie River Wooden Boat Festival
-when: Spring 2027, date to come
+event_date: 2027-04-23
+time: ""
 place: ""
 description: Organized by the nonprofit Oregon's Boat and sponsored by the association. Details on the Oregon's Boat website.
 order: 3
