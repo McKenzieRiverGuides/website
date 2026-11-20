@@ -393,3 +393,11 @@ body.menu-open{overflow:hidden}
 .events p{font-size:15px;color:var(--muted);margin-top:2px}
 @media (max-width:600px){.events{padding:20px}.events li{grid-template-columns:1fr}}
 .prose{overflow-wrap:break-word}.prose a{overflow-wrap:anywhere}
+/* Whole-card link (e.g. "Add your name to the list" on Members): no underline, the button reacts on hover */
+.foundation{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:30px 40px;border-radius:16px;border:1.5px dashed rgba(31,61,58,.3);text-decoration:none;color:inherit;transition:border-color .2s,background .2s}
+.foundation h3{font-size:24px;margin:10px 0 8px}
+.foundation p{color:var(--muted);font-size:15px;max-width:640px}
+.foundation .btn{flex:none}
+.foundation:hover{border-color:var(--river);background:rgba(31,61,58,.03)}
+.foundation:hover .btn,.foundation:focus-visible .btn{background:var(--river);color:#fff}
+@media (max-width:600px){.foundation{flex-direction:column;align-items:flex-start;padding:24px}}

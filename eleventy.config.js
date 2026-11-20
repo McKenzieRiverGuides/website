@@ -58,7 +58,10 @@ export default function (eleventyConfig) {
     (ms || []).filter((m) => yes(m["Retired Guide"]) === (which === "retired")));
   eleventyConfig.addFilter("nameList", (ms, letters) => {
     let html = "", last = "";
-    const display = (n) => { const p = n.split(","); return p.length > 1 ? p.slice(1).join(",").trim() + " " + p[0].trim() : n; };
+    // "Last, First" → "First Last". Couples: "Jones, Gene & Mandy" → "Gene & Mandy Jones";
+    // different last names: "Thompson, Devin & Ferguson, Brandi" → "Devin Thompson & Brandi Ferguson".
+    const flip = (n) => { const p = n.split(","); return p.length > 1 ? p.slice(1).join(",").trim() + " " + p[0].trim() : n.trim(); };
+    const display = (n) => { const parts = n.split("&"); return parts.length > 1 && parts.every((x) => x.includes(",")) ? parts.map(flip).join(" & ") : flip(n); };
     (ms || []).forEach((m) => {
       const L = m.Name.charAt(0).toUpperCase();
       if (letters && L !== last) { html += `<li class="letter" aria-hidden="true">${esc(L)}</li>`; last = L; }

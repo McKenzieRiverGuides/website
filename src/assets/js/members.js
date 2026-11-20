@@ -4,7 +4,9 @@
 (function () {
   var out = document.getElementById("lists"), esc = MRGA.esc, baked = MRGA.baked("members-data") || [];
   function yes(v) { return /^y/i.test(v || ""); }
-  function display(n) { var p = n.split(","); return p.length > 1 ? (p.slice(1).join(",").trim() + " " + p[0].trim()) : n; }
+  // "Last, First" → "First Last"; couples with different last names: "Thompson, Devin & Ferguson, Brandi" → "Devin Thompson & Brandi Ferguson"
+  function flip(n) { var p = n.split(","); return p.length > 1 ? (p.slice(1).join(",").trim() + " " + p[0].trim()) : n.trim(); }
+  function display(n) { var parts = n.split("&"); return parts.length > 1 && parts.every(function (x) { return x.indexOf(",") > -1; }) ? parts.map(flip).join(" & ") : flip(n); }
   function li(m) {
     var tags = [];
     if (yes(m["Life Member"])) tags.push("Life");
