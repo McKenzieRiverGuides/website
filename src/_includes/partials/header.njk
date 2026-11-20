@@ -3,6 +3,7 @@
   ["home", "Home", "/"],
   ["leadership", "Leadership", "/leadership/"],
   ["guides", "Find a Guide", "/find-a-guide/"],
+  ["members", "Members", "/members/"],
   ["news", "News &amp; Stories", "/news/"],
   ["river", "River", "/river-conditions/"]
 ] -%}
@@ -27,6 +28,6 @@
   </div>
 </header>
 <nav class="menu-panel" id="menuPanel" aria-label="Site menu">
-  <ul>{{ links | safe }}<li><a href="/members/"{% if navKey == "members" %} aria-current="page"{% endif %}>Members &amp; supporters</a></li><li><a href="/contact/"{% if navKey == "contact" %} aria-current="page"{% endif %}>Contact</a></li></ul>
+  <ul>{{ links | safe }}<li><a href="/contact/"{% if navKey == "contact" %} aria-current="page"{% endif %}>Contact</a></li></ul>
   {{ joinBtn | safe }}
 </nav>

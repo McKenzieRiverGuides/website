@@ -85,7 +85,7 @@ npm run build      # build into _site/
   `partials/head.njk`).
 - Only the homepage (historic photo slideshow, "old film" look) and About (photo hero) have the large title
   area. Every other page uses `.page-hero.compact` and its first section has `class="tight"`.
-- Top nav: Home (inner pages only; the homepage has none), Leadership, Find a Guide, News & Stories, River,
+- Top nav: Home (inner pages only; the homepage has none), Leadership, Find a Guide, Members, News & Stories, River,
   Join button. Conservation and Drift Boat pages are deferred (do not add them unless asked). Meeting
   minutes page was cut.
 - Logo: 95th-anniversary badge through 2026; the round "Organized 1931" logo switches on automatically from
