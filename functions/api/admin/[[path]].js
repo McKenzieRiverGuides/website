@@ -98,7 +98,7 @@ async function saveItem(gh, req, user) {
   files.push({ path, base64: b64(buildFile(type, fields, body, existing)) });
 
   const what = type === "posts" ? "post" : "event";
-  await gh.commit(files, `${isNew ? "New" : "Update"} ${what}: ${fields.title} (via website editor, ${who(user)})`);
+  await gh.commit(files, `${isNew ? "New" : "Update"} ${what}: ${fields.title} (via website editor)`);
   return { path, url: TYPES[type].url(path) };
 }
 
@@ -110,12 +110,11 @@ async function deleteItem(gh, req, user) {
   if (sha && current.sha !== sha) throw problem("Someone else changed this item. Reload the page first.", 409);
   const title = parseFile(current.text).data.title || path;
   // Photos stay in the repo (other posts may use them; GitHub history keeps everything anyway)
-  await gh.commit([{ path, delete: true }], `Delete ${type === "posts" ? "post" : "event"}: ${title} (via website editor, ${who(user)})`);
+  await gh.commit([{ path, delete: true }], `Delete ${type === "posts" ? "post" : "event"}: ${title} (via website editor)`);
   return { ok: true };
 }
 
-// Only the part before the @ goes in the (possibly public) commit history
-const who = (user) => user.email.split("@")[0];
+// Who saved is not written into the (public) commit history; Cloudflare Access logs record who signed in.
 
 // ------------------------------------------------------------------ GitHub (one commit per save)
 

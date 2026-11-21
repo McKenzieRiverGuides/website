@@ -333,7 +333,7 @@
   function buildForm(type, path, item, c) {
     var isPost = type === "posts";
     var f = item ? item.fields : isPost
-      ? { title: "", date: today(), author: "Leah Helfrich", cover: "", summary: "", categories: [], draft: false }
+      ? { title: "", date: today(), author: "", cover: "", summary: "", categories: [], draft: false }
       : { title: "", event_date: "", when: "", time: "", place: "", members_only: false, description: "" };
     var uploads = {}; // name → base64 (new photos for this save)
     var dirty = false;
