@@ -283,6 +283,7 @@ content:
     description: Contact details used across the website.
     fields:
       - { name: email, label: Public email address, type: string }
+      - { name: secretary_email, label: Secretary email address, type: string, description: "Shown as a link on Edit my listing. Leave empty until the mailbox works (it is hidden while empty)." }
       - { name: facebook_url, label: Facebook page link, type: string }
       - { name: foundation_url, label: McKenzie Guides Foundation website, type: string, description: "Once filled in, every \"Support the river\" and Foundation button goes straight there." }
       - { name: mailing_address, label: Mailing address, type: text }

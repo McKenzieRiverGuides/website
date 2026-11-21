@@ -34,7 +34,7 @@ pageScript: edit-listing.js
         <span class="eyebrow">Good to know</span>
         <h3>Only you can edit your listing</h3>
         <p>The link goes only to the email on your roster record, and it opens only your own listing.</p>
-        <p>Your name, membership status and private details are kept by the secretary. To change those, or if your email has changed, contact the secretary.</p>
+        <p>Your name, membership status and private details are kept by the secretary. To change those, or if your email has changed, contact the secretary{% if settings.secretary_email %} at <a href="mailto:{{ settings.secretary_email }}">{{ settings.secretary_email }}</a>{% endif %}.</p>
       </aside>
     </div>
 
