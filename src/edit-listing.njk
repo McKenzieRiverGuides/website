@@ -32,7 +32,7 @@ pageScript: edit-listing.js
       </form>
       <aside class="aside-card">
         <span class="eyebrow">Good to know</span>
-        <h3>Only you can edit your card</h3>
+        <h3>Only you can edit your listing</h3>
         <p>The link goes only to the email on your roster record, and it opens only your own listing.</p>
         <p>Your name, membership status and private details are kept by the secretary. To change those, or if your email has changed, contact the secretary.</p>
       </aside>
@@ -56,6 +56,11 @@ pageScript: edit-listing.js
         <div class="field">
           <label for="f-phone">Phone for clients</label>
           <input type="tel" id="f-phone" maxlength="30" autocomplete="tel" placeholder="541-555-0123">
+        </div>
+        <div class="field">
+          <label for="f-email">Email for clients (optional)</label>
+          <span class="hint">Shown on your guide page as a "Send an email" button. Leave it blank if you'd rather not show an email. It can be different from the email the association uses to reach you.</span>
+          <input type="email" id="f-email" maxlength="120" autocomplete="email" placeholder="you@example.com">
         </div>
         <fieldset class="field">
           <legend>Rivers and trip types</legend>

@@ -1,4 +1,6 @@
 // Eleventy config for the MRGA website. See AGENTS.md for the project rules.
+import { googleLink } from "./lib/calendar.js";
+
 export default function (eleventyConfig) {
   // Files copied as-is
   eleventyConfig.addPassthroughCopy({ "src/images": "images" });
@@ -29,6 +31,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("monthYear", (d) => fmt(d, { month: "long", year: "numeric" }));
   eleventyConfig.addFilter("longDate", (d) => fmt(d, { weekday: "long", month: "long", day: "numeric", year: "numeric" }));
   eleventyConfig.addFilter("year", (d) => fmt(d, { year: "numeric" }));
+  eleventyConfig.addFilter("monShort", (d) => fmt(d, { month: "short" }));
+  eleventyConfig.addFilter("dayNum", (d) => fmt(d, { day: "numeric" }));
+  eleventyConfig.addFilter("googleCal", (data) => googleLink(data));
   eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
 
   // Plain text from the editor → paragraphs (blank line = new paragraph, single line break kept)
@@ -40,6 +45,12 @@ export default function (eleventyConfig) {
   });
   // Guide directory helpers (same rules as the browser refresh in assets/js/site.js)
   eleventyConfig.addFilter("specs", (s) => String(s || "").split(/[,;]/).map((x) => x.trim()).filter(Boolean));
+  // A Phone cell can hold more than one number ("541-726-7234 / 541-912-8899"): split into a list.
+  // Keep in step with phones() in assets/js/find-a-guide.js.
+  const splitPhones = (s) => String(s || "").split(/\s*(?:\/|,|;|\bor\b|&)\s*/i).map((x) => x.trim()).filter((x) => /\d{3}.*\d{4}/.test(x));
+  eleventyConfig.addFilter("phones", splitPhones);
+  // The number to text: the first one that isn't toll-free (800, 888, 877 … can't receive texts)
+  eleventyConfig.addFilter("textPhone", (s) => splitPhones(s).find((p) => !/^\D*1?\D*8(00|33|44|55|66|77|88)\D/.test(p)) || "");
   eleventyConfig.addFilter("telHref", (s) => String(s || "").replace(/[^\d+]/g, ""));
   eleventyConfig.addFilter("linkHref", (u) => (/^https?:/i.test(u) ? u : "https://" + u));
   eleventyConfig.addFilter("linkHost", (u) => {
@@ -48,6 +59,11 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter("allSpecs", (guides) =>
     [...new Set((guides || []).flatMap((g) => String(g.Specialty || "").split(/[,;]/).map((x) => x.trim()).filter(Boolean)))].sort());
+  // A guide's business name, unless it just repeats their own name (then it isn't shown twice)
+  eleventyConfig.addFilter("bizName", (g) => {
+    const name = `${g["First Name"] || ""} ${g["Last Name"] || ""}`.trim().toLowerCase();
+    return (g.Business || "").trim().toLowerCase() === name ? "" : (g.Business || "").trim();
+  });
   eleventyConfig.addFilter("head", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("yes", (v) => /^y/i.test(v || ""));
   eleventyConfig.addFilter("json", (v) => JSON.stringify(v).replace(/</g, "\\u003c"));

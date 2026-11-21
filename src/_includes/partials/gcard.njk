@@ -1,7 +1,9 @@
-{#- One Find a Guide card. Keep in step with card() in assets/js/find-a-guide.js. Never show town. -#}
+{#- One Find a Guide card. Keep in step with card() in assets/js/find-a-guide.js. Never show town.
+    The whole card opens the guide's own page (/guides/<slug>/); the phone link still calls directly. -#}
 {%- set sp = g["Specialty"] | specs -%}
-<article class="gcard"><div class="gcard-top"><span class="mono" aria-hidden="true">{{ (g["First Name"] | first) }}{{ (g["Last Name"] | first) }}</span><div><h3>{{ (g["First Name"] + " " + g["Last Name"]) | trim }}</h3>{% if g.Business %}<p class="biz">{{ g.Business }}</p>{% endif %}</div></div>
+{%- set name = (g["First Name"] + " " + g["Last Name"]) | trim -%}
+<article class="gcard{% if g.slug %} has-page{% endif %}"><div class="gcard-top"><span class="mono" aria-hidden="true">{{ (g["First Name"] | first) }}{{ (g["Last Name"] | first) }}</span><div><h3>{% if g.slug %}<a href="/guides/{{ g.slug }}/">{{ name }}</a>{% else %}{{ name }}{% endif %}</h3>{% if g | bizName %}<p class="biz">{{ g | bizName }}</p>{% endif %}</div></div>
 {%- if g["Life Member"] | yes %}<span class="badge">Life member</span>{% endif -%}
 {%- if sp.length %}<p class="specs">{{ sp | join(" · ") }}</p>{% endif -%}
-{%- if g.Phone or g.Link %}<div class="gcard-links">{% if g.Phone %}<a href="tel:{{ g.Phone | telHref }}">{{ g.Phone }}</a>{% endif %}{% if g.Link %}<a href="{{ g.Link | linkHref }}" target="_blank" rel="noopener">{{ g.Link | linkHost }} ↗</a>{% endif %}</div>{% endif -%}
+<div class="gcard-links">{% set ph = g.Phone | phones %}{% if ph.length %}<span class="phones">{% for p in ph %}<a href="tel:{{ p | telHref }}">{{ p }}</a>{% endfor %}</span>{% endif %}{% if g.slug %}<span class="more" aria-hidden="true">Details →</span>{% elif g.Link %}<a href="{{ g.Link | linkHref }}" target="_blank" rel="noopener">{{ g.Link | linkHost }} ↗</a>{% endif %}</div>
 </article>

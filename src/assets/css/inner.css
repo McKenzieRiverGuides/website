@@ -199,6 +199,18 @@ section.boat .split > div > p{opacity:.85;max-width:520px}
 .gcard-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font:600 14px/1.3 var(--sans)}
 .gcard-links a{color:var(--river);text-decoration:none}
 .gcard-links a:hover{text-decoration:underline;text-underline-offset:3px}
+/* Cards with a guide page: the whole card opens it (name link stretched over the card); the phone link stays on top */
+.gcard.has-page{position:relative;transition:border-color .2s,box-shadow .2s}
+.gcard.has-page:hover{border-color:rgba(31,61,58,.35);box-shadow:0 6px 18px rgba(31,61,58,.08)}
+.gcard h3 a{color:inherit;text-decoration:none}
+.gcard h3 a::after{content:"";position:absolute;inset:0;border-radius:12px}
+.gcard h3 a:focus-visible{outline:none}
+.gcard.has-page:focus-within{outline:2px solid var(--cedar);outline-offset:2px}
+.gcard-links a{position:relative;z-index:1}
+.gcard-links .more{margin-left:auto;color:var(--cedar-2)}
+.gcard-links .phones{display:flex;flex-direction:column;gap:4px}
+.gcard-links .more{align-self:flex-end}
+.gcard-links:empty{display:none}
 .empty{padding:40px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:12px}
 .skeleton .gcard{min-height:150px;background:linear-gradient(90deg,#fff,#f4efe6,#fff);background-size:200% 100%;animation:shimmer 1.4s infinite}
 @keyframes shimmer{to{background-position:-200% 0}}
@@ -384,14 +396,6 @@ body.menu-open{overflow:hidden}
 .prose img{height:auto;border-radius:6px;margin:8px 0}
 .prose p > em:only-child{display:block;font-size:14px;color:var(--muted);margin-top:-14px}
 /* Upcoming events (News & Stories) */
-.events{margin:0 0 48px;padding:24px 28px;background:#fff;border:1px solid var(--line);border-radius:14px}
-.events h2{font-size:24px;margin:8px 0 14px}
-.events ul{list-style:none;display:grid;gap:0}
-.events li{display:grid;grid-template-columns:200px 1fr;gap:6px 24px;padding:14px 0;border-top:1px solid var(--line)}
-.events .when{font-weight:600;color:var(--cedar-2)}
-.events h3{font-size:19px}
-.events p{font-size:15px;color:var(--muted);margin-top:2px}
-@media (max-width:600px){.events{padding:20px}.events li{grid-template-columns:1fr}}
 .prose{overflow-wrap:break-word}.prose a{overflow-wrap:anywhere}
 /* Whole-card link (e.g. "Add your name to the list" on Members): no underline, the button reacts on hover */
 .foundation{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:30px 40px;border-radius:16px;border:1.5px dashed rgba(31,61,58,.3);text-decoration:none;color:inherit;transition:border-color .2s,background .2s}

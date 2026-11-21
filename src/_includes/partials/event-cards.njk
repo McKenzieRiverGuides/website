@@ -1,0 +1,18 @@
+{#- "Coming up" date cards from src/events/ (homepage and top of News). Past events hide themselves (site.js).
+   Set evShort = true for the short homepage version (no description). Events without a date yet show "TBA".
+   "Members only" events (members_only: true) get a tag, also on the short homepage version. -#}
+<ul class="ev-cards">
+  {%- for e in collections.events %}
+  {%- set d = e.data %}
+  <li class="ev" data-event{% if d.event_date %} data-event-date="{{ d.event_date | isoDate }}"{% endif %}>
+    <div class="ev-date" aria-hidden="true">{% if d.event_date %}<span class="m">{{ d.event_date | monShort }}</span><span class="d">{{ d.event_date | dayNum }}</span>{% else %}<span class="m">Date</span><span class="d tba">TBA</span>{% endif %}</div>
+    <div class="ev-body">
+      {% if d.members_only %}<span class="ev-tag">Members only</span>{% endif %}<h3>{{ d.title }}</h3>
+      <p class="ev-when">{% if d.event_date %}{{ d.event_date | longDate }}{% if d.time %} · {{ d.time }}{% endif %}{% else %}{{ d.when or "Date to come" }}{% endif %}</p>
+      {% if d.place %}<p class="ev-place">{{ d.place }}</p>{% endif %}
+      {% if d.description and not evShort %}<p class="ev-desc">{{ d.description }}</p>{% endif %}
+      {% if d.event_date %}<p class="ev-cal"><a href="/calendar/{{ e.page.fileSlug }}.ics" download>Add to calendar</a><a href="{{ d | googleCal }}" target="_blank" rel="noopener">Google Calendar <span aria-hidden="true">↗</span></a></p>{% endif %}
+    </div>
+  </li>
+  {%- endfor %}
+</ul>

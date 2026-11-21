@@ -35,11 +35,11 @@ npm run build      # build into _site/
 
 | Path | What it is |
 |---|---|
-| `src/*.njk` | One file per page: `index` (homepage), `about`, `leadership`, `find-a-guide`, `members`, `join`, `news`, `river-conditions`, `contact`, `edit-listing`, `404` |
+| `src/*.njk` | One file per page (`guide.njk` makes one page per guide): `index` (homepage), `about`, `leadership`, `find-a-guide`, `members`, `join`, `news`, `river-conditions`, `contact`, `edit-listing`, `404` |
 | `src/_includes/layouts/` | `base.njk` (all inner pages), `home.njk` (homepage), `post.njk` (posts and newsletter issues) |
 | `src/_includes/partials/` | Shared header + phone menu, footer, `<head>`, guide card, Foundation link |
 | `src/posts/` | News & Stories, one Markdown file per post (`YYYY-MM-DD-slug.md`). Address `/news/<slug>/` |
-| `src/events/` | Events (annual meeting, annual dinner, Wooden Boat Festival). Shown under "Coming up" on News |
+| `src/events/` | Events (annual meeting, annual dinner & auction, Wooden Boat Festival). Shown under "Coming up" on the homepage and News |
 | `src/newsletters/` | Newsletter archive issues (empty until the first issue) |
 | `src/_data/` | `settings.json` (email, Facebook, Foundation URL, address), `festival.json` (homepage festival block), `leadership.json` (officers + board), `text/*.json` (editable page text), `config.json` (technical: sheet ID, editor API; not in Pages CMS), `directory.js` (reads the public sheet at build), `build.js` (cache-busting version) |
 | `src/assets/css/` | `inner.css` (all inner pages), `home.css` (homepage), `river.css` (River page only) |
@@ -62,11 +62,25 @@ npm run build      # build into _site/
   sponsors who are active guides plus a current Oregon Marine Board license. Nobody is listed before the
   vote. Never write copy implying instant membership or listing.
 - **Annual meeting:** second Saturday of January (officers elected there for two-year terms, every other
-  year). **Annual dinner:** April.
+  year). **Annual dinner & auction:** April, members only, ticketed
+  (members who attend buy a ticket; space for about 100). Never present it as open to the public.
 - **Wooden Boat Festival** is owned and organized by the nonprofit Oregon's Boat; MRGA sponsors it.
   Oregon's Boat **sells the poster**: the site shows only a low-res preview (max 400px wide), labeled
   "Poster © Oregon's Boat", with a "Buy the poster" link, no download and no full-size link. Never put a
   full-resolution poster in this repo. The current preview is a stand-in (2019 poster) until the new one.
+- **Guide pages** (`src/guide.njk`, styles `assets/css/guide.css`): one page per active guide at `/guides/<first-last>/`,
+  built automatically from the public sheet (address rule in `src/_data/directory.js` and `find-a-guide.js`, kept in
+  step). Each Find a Guide card opens its guide's page; the page ends in Call / Text (phones only) / Website or
+  Facebook buttons. The green band says "Find a guide"; on the beige a vertical (3:4) photo space sits
+  beside the name, business and "About <first>" bio (photo and bio are placeholders until guides can add them).
+  Rivers & trips pills sit in the Contact card. A "Send an email" button shows only when the guide has a
+  PUBLIC email (Master column K "Public Email" → public sheet column "Email", set by the guide in Edit my listing;
+  never the private column F roster email). No "Professional guide" tag and no "About the association" text
+  (user, 2026-11-20). Same layout for every guide, no ranking, never town. Only sheet data, never copied from Facebook
+  or guide websites. A business name that repeats the guide's own name isn't shown twice (`bizName` filter).
+  On Cloudflare the build stops if the sheet can't be read (so guide pages are never wiped); the live site stays up.
+  `.github/workflows/daily-rebuild.yml` rebuilds daily through the Cloudflare deploy hook in the GitHub secret
+  `CF_DEPLOY_HOOK`, so new or departed guides show up within a day.
 - **Directories:** Find a Guide lists active guides only. **Never show or search by town.** Rivers a guide
   fishes go in Specialty ("National Forest McKenzie", "McKenzie River", "Willamette"; trip types "Drift boat",
   "Fly fishing", "Scenic tours", "White water rafting"). National Forest McKenzie means the guide holds the
@@ -76,6 +90,11 @@ npm run build      # build into _site/
   links, the archive panel, "and the newsletter" on Join) appears automatically once at least one issue is
   in `src/newsletters/`; until then it is hidden. Private member emails are archived in a private Drive
   folder, never here.
+- **Events** (`src/events/`): shown as date cards (`partials/event-cards.njk`, styles `assets/css/events.css`) in a
+  "Coming up" band on the homepage (next three, under the numbers strip) and at the top of News (`/news/#events`).
+  Each dated event gets "Add to calendar" (`/calendar/<file>.ics`, built by `src/calendar.11ty.js` with
+  `lib/calendar.js`) and a Google Calendar link; all-day unless Time reads like "6 PM". Past events hide themselves.
+  **No separate page per event and no Events page/menu item** (user, 2026-11-20); events stay as cards only.
 - **News & Stories:** few posts a year; newest first, month + year dates. River-hazard notices and stories
   are mixed by date. Imported posts keep their original text, authors and categories.
 
@@ -113,7 +132,7 @@ npm run build      # build into _site/
   script's `EDIT_PAGES` allowlist**. When the site address changes (pages.dev, mckenzieguides.com), add
   the new `/edit-listing/` address to `EDIT_PAGES` in the Apps Script project and redeploy it as a new
   version of the same deployment (keeps the URL).
-- Guides can change only business, website, phone and Specialty. Name, email, membership status stay with
+- Guides can change only business, website, phone, public email and Specialty. Name, email, membership status stay with
   the secretary in the Master sheet.
 
 ## Working on the site

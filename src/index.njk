@@ -58,6 +58,18 @@ permalink: /
   </div>
 </div>
 
+{%- if collections.events.length %}
+<section class="coming" id="coming-up" data-events data-events-limit="3">
+  <div class="wrap">
+    <div class="coming-head">
+      <div><span class="eyebrow">Coming up</span><h2>Association events</h2></div>
+      <a href="/news/#events">All news &amp; events →</a>
+    </div>
+    {% set evShort = true %}{% include "partials/event-cards.njk" %}
+  </div>
+</section>
+{%- endif %}
+
 <section>
   <div class="wrap intro">
     <div>

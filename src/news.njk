@@ -4,6 +4,7 @@ description: News and stories from the McKenzie River Guides Association, includ
 navKey: news
 permalink: /news/
 pageScript: news.js
+pageCss: events.css
 ---
 {%- set posts = collections.posts -%}
 {%- set first = posts[0] -%}
@@ -19,6 +20,14 @@ pageScript: news.js
 
 <section class="tight">
   <div class="wrap">
+    {%- if collections.events.length %}
+    <div class="events-top" id="events" data-events>
+      <span class="eyebrow">Coming up</span>
+      <h2>Association events</h2>
+      {% include "partials/event-cards.njk" %}
+    </div>
+    {%- endif %}
+
     {% if first -%}
     <a class="feature" href="{{ first.url }}">
       {% if first.data.cover %}<img class="cover" src="{{ first.data.cover }}" alt="" loading="eager">{% else %}<div class="ph"></div>{% endif %}
@@ -31,20 +40,6 @@ pageScript: news.js
     </a>
     {%- endif %}
 
-    {%- if collections.events.length %}
-    <div class="events" data-events>
-      <span class="eyebrow">Coming up</span>
-      <h2>Association events</h2>
-      <ul>
-        {%- for e in collections.events %}
-        <li data-event{% if e.data.event_date %} data-event-date="{{ e.data.event_date | isoDate }}"{% endif %}>
-          <span class="when">{% if e.data.event_date %}{{ e.data.event_date | longDate }}{% if e.data.time %}<br>{{ e.data.time }}{% endif %}{% else %}{{ e.data.when or "Date to come" }}{% endif %}</span>
-          <div><h3>{{ e.data.title }}</h3>{% if e.data.place %}<p>{{ e.data.place }}</p>{% endif %}{% if e.data.description %}<p>{{ e.data.description }}</p>{% endif %}</div>
-        </li>
-        {%- endfor %}
-      </ul>
-    </div>
-    {%- endif %}
 
     {%- set cats = posts | uniqueCats %}
     {%- if cats.length > 1 %}

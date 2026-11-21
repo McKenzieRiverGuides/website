@@ -1,0 +1,71 @@
+---
+pagination:
+  data: directory.guides
+  size: 1
+  alias: g
+  addAllPagesToCollections: false
+permalink: "/guides/{{ g.slug }}/"
+navKey: guides
+pageCss: guide.css
+eleventyComputed:
+  title: "{{ (g['First Name'] + ' ' + g['Last Name']) | trim }}{% if g | bizName %} · {{ g | bizName }}{% endif %}"
+  description: "{{ (g['First Name'] + ' ' + g['Last Name']) | trim }}{% if g | bizName %}, {{ g | bizName }}{% endif %}: professional McKenzie River guide{% if g.Specialty %} ({{ g.Specialty | specs | join(', ') }}){% endif %}. Active member of the McKenzie River Guides Association."
+---
+{#- One page per active guide, built from the public sheet (src/_data/directory.js). Never show town.
+    A guide who leaves the sheet loses the page at the next build (daily rebuild: .github/workflows/daily-rebuild.yml). -#}
+{%- set name = (g["First Name"] + " " + g["Last Name"]) | trim -%}
+{%- set first = g["First Name"] or name -%}
+{%- set sp = g["Specialty"] | specs -%}
+{%- set isFb = g.Link and ("facebook.com" in (g.Link | lower) or "fb.com" in (g.Link | lower)) -%}
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <p class="hero-title">Find a <em>guide</em></p>
+      <p class="status">Every active MRGA guide holds an Oregon State Marine Board license. <a href="/find-a-guide/">← All guides</a></p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap guide-page">
+    <div class="guide-head">
+      {#- Guide photo: none in the sheet yet (Step 2: guides add one through Edit my listing). -#}
+      <div class="guide-photo ph" role="img" aria-label="Photo of {{ name }} to come"><span class="ph-label">Guide photo (to come)</span></div>
+      <div class="guide-info">
+        <h1>{{ name }}</h1>
+        {% if g | bizName %}<p class="biz">{{ g | bizName }}</p>{% endif %}
+        {% if g["Life Member"] | yes %}<p class="guide-tags"><span class="badge">Life member</span></p>{% endif %}
+      </div>
+      <div class="guide-bio">
+        <h2 class="guide-h">About {{ first }}</h2>
+        {#- Bio: placeholder until guides can add their own (Step 2). -#}
+        <p class="placeholder-text">Placeholder bio. A few sentences from {{ first }} about their guiding: how long they've guided the McKenzie, favorite trips and what a day on the water looks like. Guides will add this themselves through Edit my listing.</p>
+      </div>
+    </div>
+
+    <aside class="aside-card contact-card">
+      <span class="eyebrow">Plan a trip</span>
+      <h3>Contact {{ first }}</h3>
+      {% if sp.length -%}
+      <ul class="spec-list" aria-label="Rivers and trips">{% for s in sp %}<li>{{ s }}</li>{% endfor %}</ul>
+      {%- if "National Forest McKenzie" in sp %}
+      <p class="permit">Holds the Willamette National Forest guide permit.</p>
+      {%- endif %}
+      {%- endif %}
+      {% if g.Phone or g.Link or g.Email -%}
+      <p>Reach {{ first }} directly to ask about dates, rates and trips.</p>
+      <div class="cta">
+        {%- set ph = g.Phone | phones %}
+        {% for p in ph %}<a class="btn {{ 'btn-cedar' if loop.first else 'btn-line' }}" href="tel:+1{{ p | telHref }}">Call {{ p }}</a>{% endfor %}
+        {% if g.Email %}<a class="btn {{ 'btn-line' if ph.length else 'btn-cedar' }}" href="mailto:{{ g.Email }}?subject={{ ('Trip inquiry from the McKenzie River Guides website') | urlencode }}">Send an email</a>{% endif %}
+        {% set tp = g.Phone | textPhone %}{% if tp %}<a class="btn btn-line sms" href="sms:+1{{ tp | telHref }}">Send a text{% if ph.length > 1 %} to {{ tp }}{% endif %}</a>{% endif %}
+        {% if g.Link %}<a class="btn btn-line" href="{{ g.Link | linkHref }}" target="_blank" rel="noopener">{% if isFb %}Facebook page{% else %}Visit website{% endif %} <span aria-hidden="true">↗</span></a>{% endif %}
+      </div>
+      {%- else -%}
+      <p>Contact details aren't listed yet. The association can put you in touch.</p>
+      <div class="cta"><a class="btn btn-cedar" href="/contact/">Contact the association</a></div>
+      {%- endif %}
+      <p class="small">Are you {{ first }}? <a href="/edit-listing/">Update your listing</a>.</p>
+    </aside>
+  </div>
+</section>

@@ -4,3 +4,5 @@
   Cache-Control: public, max-age=31536000, immutable
 /images/*
   Cache-Control: public, max-age=86400
+/calendar/*
+  Content-Type: text/calendar; charset=utf-8

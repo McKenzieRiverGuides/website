@@ -45,6 +45,10 @@ MRGA.baked = function (id) { var el = document.getElementById(id); try { return 
 document.querySelectorAll("[data-event-date]").forEach(function (el) {
   if (new Date(el.getAttribute("data-event-date") + "T23:59:59") < new Date()) el.hidden = true;
 });
+document.querySelectorAll("[data-events-limit]").forEach(function (box) {
+  var max = +box.getAttribute("data-events-limit");
+  box.querySelectorAll("[data-event]:not([hidden])").forEach(function (el, i) { if (i >= max) el.hidden = true; });
+});
 document.querySelectorAll("[data-events]").forEach(function (box) {
   if (!box.querySelector("[data-event]:not([hidden])")) box.hidden = true;
 });

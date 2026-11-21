@@ -73,7 +73,7 @@ content:
     type: collection
     path: src/events
     filename: "{primary}.md"
-    description: Annual meeting (second Saturday of January), annual dinner (April) and the Wooden Boat Festival. Shown under "Coming up" on the News page; past dates hide themselves.
+    description: Annual meeting (second Saturday of January), annual dinner (April) and the Wooden Boat Festival. Shown under "Coming up" on the homepage (next three) and at the top of the News page, with "Add to calendar" links once a date is set; past dates hide themselves.
     view:
       fields: [title, event_date, when]
       primary: title
@@ -93,9 +93,15 @@ content:
       - name: time
         label: Time (optional)
         type: string
+        description: For example "6 PM" or "6:30 pm". Calendar entries use it (two hours long); leave empty for an all-day entry.
       - name: place
         label: Place
         type: string
+      - name: members_only
+        label: Members only
+        type: boolean
+        default: false
+        description: Turn on for events only members can attend (for example the annual dinner & auction). Shows a "Members only" tag.
       - name: description
         label: Description
         type: text

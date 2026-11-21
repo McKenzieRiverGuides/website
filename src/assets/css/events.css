@@ -1,0 +1,22 @@
+/* "Coming up" event date cards (partials/event-cards.njk): homepage band and top of the News page. */
+.ev-cards{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:0;padding:0}
+.ev{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.ev-date{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:var(--river);color:#fff;padding:8px 0 10px;text-align:center;line-height:1}
+.ev-date .m{font:700 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#f1c79d}
+.ev-date .d{font:600 28px/1 var(--serif);margin-top:6px}
+.ev-date .d.tba{font:700 15px/1 var(--sans);letter-spacing:.06em;margin-top:8px}
+.ev-tag{display:inline-block;margin:0 0 6px;padding:3px 9px;border-radius:999px;background:var(--paper-2);color:var(--river);font:700 11px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.ev h3{font:600 20px/1.2 var(--serif);margin:0}
+.ev-when{font-weight:600;font-size:15px;color:var(--cedar-2);margin:6px 0 0}
+.ev-place,.ev-desc{font-size:15px;line-height:1.5;color:var(--muted);margin:4px 0 0}
+.ev-cal{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 0;font-size:14px;font-weight:600}
+.ev-cal a{color:var(--river);text-underline-offset:3px}
+/* Homepage band, right under the numbers strip */
+.coming{padding:44px 0 8px}
+.coming-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px 24px;flex-wrap:wrap;margin-bottom:18px}
+.coming-head h2{font:600 clamp(24px,3vw,30px)/1.15 var(--serif);margin:8px 0 0}
+.coming-head a{font:600 14px var(--sans);color:var(--river)}
+/* News page: events row above the stories */
+.events-top{margin:0 0 44px}
+.events-top h2{font-size:24px;margin:8px 0 16px}
+@media (max-width:600px){.ev-cards{grid-template-columns:1fr}.ev{padding:16px;gap:14px;grid-template-columns:56px minmax(0,1fr)}.coming{padding-top:36px}}

@@ -31,6 +31,7 @@ var EDITOR_API = "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJ
   function readForm() {
     return {
       business: $("f-business").value.trim(), link: $("f-link").value.trim(), phone: $("f-phone").value.trim(),
+      publicEmail: $("f-email").value.trim(),
       specialty: [].map.call(document.querySelectorAll("#f-specialty input:checked"), function (c) { return c.value; })
     };
   }
@@ -49,6 +50,7 @@ var EDITOR_API = "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJ
     g.specialty.forEach(function (s) { if (options.indexOf(s) < 0) options.push(s); });   // keep anything not in the list
     $("editName").textContent = g.first + " " + g.last;
     $("f-business").value = g.business || ""; $("f-link").value = g.link || ""; $("f-phone").value = g.phone || "";
+    $("f-email").value = g.publicEmail || "";
     $("f-specialty").innerHTML = options.map(function (o) {
       return '<label class="check"><input type="checkbox" value="' + esc(o) + '"' + (g.specialty.indexOf(o) > -1 ? " checked" : "") + "> " + esc(o) + "</label>";
     }).join("");
@@ -60,6 +62,8 @@ var EDITOR_API = "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJ
     e.preventDefault();
     var b = $("saveBtn"); b.disabled = true; b.textContent = "Saving…";
     var done = function () { b.disabled = false; b.textContent = "Save changes"; };
+    var pe = $("f-email").value.trim();
+    if (pe && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pe)) { msg("editMsg", "err", "That email address doesn't look right. Example: you@example.com"); done(); return; }
     if (demo) { msg("editMsg", "ok", "Demo only: nothing was saved. In the real editor your listing updates on the website within a few minutes."); done(); return; }
     api({ action: "save", token: token, fields: readForm() })
       .then(function (d) { msg("editMsg", "ok", d.message); })
@@ -76,7 +80,7 @@ var EDITOR_API = "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJ
       .then(function (d) { showEditor(d.guide, d.specialtyOptions); })
       .catch(function (err) { $("stepRequest").hidden = false; msg("requestMsg", "err", err.message); });
   } else if (demo) {
-    showEditor({ first: "Sample", last: "Guide", business: "Sample Guide Service", link: "https://example.com", phone: "541-555-0123", life: false,
+    showEditor({ first: "Sample", last: "Guide", business: "Sample Guide Service", link: "https://example.com", phone: "541-555-0123", publicEmail: "", life: false,
       specialty: ["McKenzie River", "Drift boat"] },
       ["National Forest McKenzie", "McKenzie River", "Willamette", "Drift boat", "Fly fishing", "Scenic tours", "White water rafting"]);
   }

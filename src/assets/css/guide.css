@@ -1,0 +1,31 @@
+/* One guide's page (src/guide.njk). */
+/* Green band: generic "Find a guide" title; the guide's name is the page heading below, on the beige */
+.hero-title{font:400 clamp(30px,3.2vw,40px)/1.1 var(--serif);margin:0 0 6px;color:#fff}
+.hero-title em{font-style:italic;color:#f1c79d}
+.page-hero .status a{color:#fff;font-weight:600;margin-left:6px;white-space:nowrap}
+/* Layout: photo beside name + bio on the left, contact card (with rivers & trips) on the right.
+   Phones: photo beside name, bio below, then the contact card. */
+.guide-page{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px 72px;align-items:start}
+.guide-head{display:grid;grid-template-columns:240px minmax(0,1fr);grid-template-areas:"photo info" "photo bio";grid-template-rows:auto 1fr;gap:0 32px;align-items:start}
+.guide-photo{grid-area:photo;aspect-ratio:3/4;border-radius:14px;overflow:hidden}
+.guide-info{grid-area:info}
+.guide-bio{grid-area:bio;margin-top:22px}
+.guide-head h1{font-size:clamp(32px,3.6vw,44px);line-height:1.08;margin:4px 0 0}
+.guide-head .biz{font-size:18px;color:var(--muted);margin:6px 0 0}
+.guide-tags{margin:12px 0 0}
+.guide-h{font-size:22px;margin:0 0 10px}
+.guide-bio .placeholder-text{margin:0}
+.spec-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 14px;padding:0}
+.spec-list li{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font:500 13.5px/1.3 var(--sans);color:var(--ink)}
+.contact-card .permit{font-size:13.5px;margin:-6px 0 14px}
+.contact-card .cta{display:grid;gap:10px;margin:4px 0 18px}
+.contact-card .cta .btn{justify-content:center;font-size:16px;padding:15px 20px}
+.contact-card .small{font-size:14px;margin:0}
+.contact-card .small a{color:var(--river)}
+/* "Send a text" only where texting works: phones and tablets */
+@media (hover:hover) and (pointer:fine){.contact-card .sms{display:none}}
+@media (max-width:1080px){.guide-page{grid-template-columns:1fr;gap:32px}}
+@media (max-width:600px){
+  .guide-head{grid-template-columns:120px minmax(0,1fr);grid-template-areas:"photo info" "bio bio";grid-template-rows:auto;gap:0 18px}
+  .guide-head h1{font-size:30px}.guide-head .biz{font-size:16px}
+}
