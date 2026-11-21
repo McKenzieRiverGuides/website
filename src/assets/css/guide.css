@@ -8,6 +8,8 @@
 .guide-page{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px 72px;align-items:start}
 .guide-head{display:grid;grid-template-columns:240px minmax(0,1fr);grid-template-areas:"photo info" "photo bio";grid-template-rows:auto 1fr;gap:0 32px;align-items:start}
 .guide-photo{grid-area:photo;aspect-ratio:3/4;border-radius:14px;overflow:hidden}
+img.guide-photo{width:100%;height:auto;object-fit:cover;object-position:50% 30%;display:block}
+.guide-bio p{margin:0 0 12px}
 .guide-info{grid-area:info}
 .guide-bio{grid-area:bio;margin-top:22px}
 .guide-head h1{font-size:clamp(32px,3.6vw,44px);line-height:1.08;margin:4px 0 0}

@@ -30,7 +30,8 @@ async function tab(name) {
 }
 
 // "Email" is the guide's PUBLIC email (Master column K "Public Email"), filled in by the guide; never the private roster email.
-const GUIDE_COLS = ["First Name", "Last Name", "Business", "Link", "Phone", "Email", "Life Member", "Specialty"];
+// "Bio" (Master column L) and "Photo" (column M: a file name in src/images/guides/ or an https address) feed the guide pages.
+const GUIDE_COLS = ["First Name", "Last Name", "Business", "Link", "Phone", "Email", "Life Member", "Specialty", "Bio", "Photo"];
 const MEMBER_COLS = ["Name", "Retired Guide", "Life Member", "Honorary Member"];
 const pick = (o, cols) => Object.fromEntries(cols.map((c) => [c, o[c] || ""]));
 

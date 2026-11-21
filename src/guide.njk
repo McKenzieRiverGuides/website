@@ -29,8 +29,9 @@ eleventyComputed:
 <section class="tight">
   <div class="wrap guide-page">
     <div class="guide-head">
-      {#- Guide photo: none in the sheet yet (Step 2: guides add one through Edit my listing). -#}
-      <div class="guide-photo ph" role="img" aria-label="Photo of {{ name }} to come"><span class="ph-label">Guide photo (to come)</span></div>
+      {#- Photo: sheet column "Photo" (see the guidePhoto filter); placeholder until there is one. -#}
+      {%- set photo = g.Photo | guidePhoto %}
+      {% if photo %}<img class="guide-photo" src="{{ photo }}" alt="{{ name }}" width="600" height="800">{% else %}<div class="guide-photo ph" role="img" aria-label="Photo of {{ name }} to come"><span class="ph-label">Guide photo (to come)</span></div>{% endif %}
       <div class="guide-info">
         <h1>{{ name }}</h1>
         {% if g | bizName %}<p class="biz">{{ g | bizName }}</p>{% endif %}
@@ -38,8 +39,8 @@ eleventyComputed:
       </div>
       <div class="guide-bio">
         <h2 class="guide-h">About {{ first }}</h2>
-        {#- Bio: placeholder until guides can add their own (Step 2). -#}
-        <p class="placeholder-text">Placeholder bio. A few sentences from {{ first }} about their guiding: how long they've guided the McKenzie, favorite trips and what a day on the water looks like. Guides will add this themselves through Edit my listing.</p>
+        {#- Bio: sheet column "Bio" (guides edit it in Edit my listing); placeholder until there is one. -#}
+        {% if g.Bio %}{{ g.Bio | paras | safe }}{% else %}<p class="placeholder-text">Placeholder bio. A few sentences from {{ first }} about their guiding: how long they've guided the McKenzie, favorite trips and what a day on the water looks like. Guides will add this themselves through Edit my listing.</p>{% endif %}
       </div>
     </div>
 

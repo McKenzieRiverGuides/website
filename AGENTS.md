@@ -75,7 +75,11 @@ npm run build      # build into _site/
   beside the name, business and "About <first>" bio (photo and bio are placeholders until guides can add them).
   Rivers & trips pills sit in the Contact card. A "Send an email" button shows only when the guide has a
   PUBLIC email (Master column K "Public Email" → public sheet column "Email", set by the guide in Edit my listing;
-  never the private column F roster email). No "Professional guide" tag and no "About the association" text
+  never the private column F roster email).
+  Bio = Master column L → public "Bio" (guides edit it in Edit my listing, 900 characters, blank line = new
+  paragraph). Photo = Master column M → public "Photo": a file name in `src/images/guides/` (upload it there in
+  Pages CMS, e.g. `leah-helfrich.jpg`) or an https address; shown in the 3:4 frame (`guidePhoto` filter falls back
+  to the placeholder if the file is missing). Only use photos the guide has agreed to. No "Professional guide" tag and no "About the association" text
   (user, 2026-11-20). Same layout for every guide, no ranking, never town. Only sheet data, never copied from Facebook
   or guide websites. A business name that repeats the guide's own name isn't shown twice (`bizName` filter).
   On Cloudflare the build stops if the sheet can't be read (so guide pages are never wiped); the live site stays up.

@@ -1,4 +1,5 @@
 // Eleventy config for the MRGA website. See AGENTS.md for the project rules.
+import { existsSync } from "node:fs";
 import { googleLink } from "./lib/calendar.js";
 
 export default function (eleventyConfig) {
@@ -63,6 +64,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("bizName", (g) => {
     const name = `${g["First Name"] || ""} ${g["Last Name"] || ""}`.trim().toLowerCase();
     return (g.Business || "").trim().toLowerCase() === name ? "" : (g.Business || "").trim();
+  });
+  // A guide's photo (sheet column "Photo"): a file name in src/images/guides/ ("leah-helfrich.jpg", uploaded in
+  // Pages CMS) or a full https:// address. Returns "" (→ photo placeholder) if the file isn't there.
+  eleventyConfig.addFilter("guidePhoto", (v) => {
+    v = String(v || "").trim();
+    if (/^https:\/\/\S+$/i.test(v)) return v;
+    const name = v.split("/").pop();
+    return name && /^[\w.-]+\.(jpe?g|png|webp)$/i.test(name) && existsSync(`src/images/guides/${name}`) ? `/images/guides/${name}` : "";
   });
   eleventyConfig.addFilter("head", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("yes", (v) => /^y/i.test(v || ""));
