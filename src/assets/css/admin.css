@@ -64,6 +64,15 @@ body.adm-on{padding-bottom:64px}
 .adm-toast pre{margin-top:6px;max-height:40vh;overflow:auto;background:var(--paper);border-radius:8px;padding:10px;font:12px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
 .adm-x{position:absolute;top:8px;right:10px;background:none;border:0;font:400 24px/1 var(--sans);color:var(--muted);cursor:pointer;padding:2px 6px}
 
+/* ---------- "Are you sure?" box */
+.adm-ask{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:16px}
+.adm-ask-box{position:relative;background:#fff;border-radius:16px;padding:24px;max-width:440px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.adm-ask-box h2{font-size:24px;overflow-wrap:anywhere}
+.adm-ask-box p{color:var(--muted);font-size:16px;margin:10px 0 20px}
+.adm-ask-btns{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.adm-danger{background:#9b2c1f;color:#fff}
+.adm-danger:hover{background:#7d2318}
+
 /* ---------- slide-in form */
 body.adm-lock{overflow:hidden}
 .adm-drawer{position:fixed;inset:0;z-index:70;display:flex;justify-content:flex-end}

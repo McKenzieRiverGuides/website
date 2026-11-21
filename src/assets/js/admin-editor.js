@@ -159,13 +159,38 @@
     if (!sticky && !extra) setTimeout(function () { t.remove(); }, 7000);
   }
 
+  // "Are you sure?" box drawn in the page. (The browser's own confirm() box is blocked in some browsers and
+  // in-app browser panes, where it silently answers "no".) Resolves true for the main button, false otherwise.
+  var asking = false;
+  function ask(title, message, okLabel, danger) {
+    asking = true;
+    return new Promise(function (resolve) {
+      var back = document.activeElement;
+      var done = function (yes) { box.remove(); asking = false; if (back && back.focus) back.focus(); resolve(yes); };
+      var ok = el("button", { type: "button", class: "btn " + (danger ? "adm-danger" : "btn-cedar"), text: okLabel, onclick: function () { done(true); } });
+      var no = el("button", { type: "button", class: "btn btn-line", text: "Cancel", onclick: function () { done(false); } });
+      var box = el("div", { class: "adm-ask", role: "alertdialog", "aria-modal": "true", "aria-labelledby": "adm-ask-t", "aria-describedby": "adm-ask-m" }, [
+        el("div", { class: "adm-shade", onclick: function () { done(false); } }),
+        el("div", { class: "adm-ask-box" }, [el("h2", { id: "adm-ask-t", text: title }), el("p", { id: "adm-ask-m", text: message }),
+          el("div", { class: "adm-ask-btns" }, [no, ok])]),
+      ]);
+      box.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); done(false); }
+        if (e.key === "Tab") { e.preventDefault(); (document.activeElement === ok ? no : ok).focus(); }
+      });
+      document.body.appendChild(box);
+      (danger ? no : ok).focus();
+    });
+  }
+
   // ---------------------------------------------------------------- admin bar (bottom of every page)
   var bar = el("div", { class: "adm-bar", role: "region", "aria-label": "Admin" }, [
     el("span", { class: "adm-who" }, [el("strong", { text: "Admin" }), " " + A.user.email]),
     PREVIEW ? el("span", { class: "adm-preview-tag", text: "Preview mode", title: "Nothing is saved to the website in the preview" }) : null,
     location.pathname.indexOf("/news/") !== 0 ? el("a", { href: "/news/", text: "News & Stories" }) : null,
     PREVIEW && Object.keys(readChanges()).length ? el("button", { type: "button", text: "Undo preview changes", onclick: function () {
-      if (confirm("Remove all the changes you made in the preview? (Nothing was saved to the website.)")) { writeChanges({}); location.reload(); }
+      ask("Undo preview changes?", "This removes all the changes you made in the preview. Nothing was saved to the website.", "Undo changes", true)
+        .then(function (yes) { if (yes) { writeChanges({}); location.reload(); } });
     } }) : null,
     el("button", { type: "button", text: "Sign out", onclick: function () { A.signOut(); } }),
   ]);
@@ -303,21 +328,24 @@
 
   // ---------------------------------------------------------------- delete
   function removeItem(type, path, node) {
-    var name = (node.querySelector("h1,h2,h3,span") || {}).textContent || "this item";
-    var msg = "Delete “" + name.trim() + "”?\n\n" + (PREVIEW
+    // The headline (h1 on a post page, h2/h3 on cards); drafts list items only have a span
+    var head = node.querySelector("h1") || node.querySelector("h2,h3") || node.querySelector("span");
+    var name = ((head && head.textContent) || "").trim() || "this " + (type === "posts" ? "post" : "event");
+    var msg = PREVIEW
       ? "Preview: nothing on the website is deleted."
-      : "It disappears from the website in about 3 minutes. (It can still be brought back from the website's history if needed.)");
-    if (!confirm(msg)) return;
+      : "It disappears from the website in about 3 minutes. It can still be brought back from the website's history if needed.";
     var sha = null;
-    (PREVIEW ? Promise.resolve() : api.get(type, path).then(function (it) { sha = it.sha; }))
+    ask("Delete “" + name + "”?", msg, "Delete", true).then(function (yes) {
+      if (!yes) return;
+      return (PREVIEW ? Promise.resolve() : api.get(type, path).then(function (it) { sha = it.sha; }))
       .then(function () { return api.del(type, path, sha); })
       .then(function () {
         applyChange(path, { type: type, deleted: true });
         showDrafts();
         toast(PREVIEW ? "Deleted in the preview only. Nothing on the website changed." : "Deleted. It will be gone from the website in about 3 minutes.");
         if (node.matches("article") && !PREVIEW) setTimeout(function () { location.href = "/news/"; }, 2500);
-      })
-      .catch(function (e) { toast(e.message, true); });
+      });
+    }).catch(function (e) { toast(e.message, true); });
   }
 
   // ---------------------------------------------------------------- the form
@@ -506,7 +534,12 @@
 
     function showError(m) { err.textContent = m; err.hidden = false; bodyWrap.scrollTop = 0; }
     function close(force) {
-      if (!force && dirty && !confirm("Close without saving? Your changes will be lost.")) return;
+      if (asking || !drawer) return;
+      if (!force && dirty) {
+        ask("Close without saving?", "Your changes to this " + (isPost ? "post" : "event") + " will be lost.", "Close without saving", true)
+          .then(function (yes) { if (yes) close(true); });
+        return;
+      }
       drawer.remove(); drawer = null;
       document.body.classList.remove("adm-lock");
       if (lastFocus && lastFocus.focus) lastFocus.focus();
