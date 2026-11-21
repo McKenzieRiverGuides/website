@@ -1,5 +1,7 @@
 {
   "_note": "Technical settings, not edited in Pages CMS. See AGENTS.md.",
   "public_sheet_id": "186En2Teq58HH3EeufoKBbKtzYxZ5xnfdvxa9OvzV780",
-  "guide_editor_api": "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJOhQcTnpocAAtFQa8vMQlH2jJge_zvlLEeplJOLdWuE_TI/exec"
+  "guide_editor_api": "https://script.google.com/macros/s/AKfycbzmNTYTz5LIjdLwQSVzPWJOhQcTnpocAAtFQa8vMQlH2jJge_zvlLEeplJOLdWuE_TI/exec",
+  "site_url": "https://mckenzieguides.pages.dev",
+  "_site_url_note": "Full website address, used in Facebook/link previews. Change to https://mckenzieguides.com at launch."
 }

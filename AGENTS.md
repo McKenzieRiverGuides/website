@@ -22,6 +22,11 @@ Nothing private ever goes in this repository. It may be public and it is exactly
   the browser (1600 px JPEG) and saved in `src/images/posts/<slug>/`. On localhost the editor runs in a pretend
   preview mode (any email/code; nothing saved). Settings in Cloudflare Pages: `GITHUB_TOKEN` (secret),
   `GITHUB_REPO`, `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`. `/admin/content.json` lists all posts (drafts too) and events.
+  Posts are edited/deleted only from their own page (News cards stay plain links; events, which have no page, keep
+  Edit/Delete on their cards). Live post pages also get a "Share on Facebook" button for admins (Facebook's share
+  window; nothing is posted automatically).
+- **Link previews** (Facebook, texts): `partials/head.njk` writes og: tags (title, summary, post cover photo) using
+  `config.site_url` in `src/_data/config.json`. **At launch, change `site_url` to https://mckenzieguides.com.**
 - **Guide and member directories** are NOT in this repo. They live in Google Sheets owned by
   the association Google account (private "MRGA Roster – Master" → public "MRGA Directory – Public (website)",
   which has public columns only). The build reads the public sheet (gviz CSV) and bakes the lists into

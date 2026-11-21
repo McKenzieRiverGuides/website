@@ -204,9 +204,12 @@
   function typeOf(path) { return path.indexOf("src/events/") === 0 ? "events" : "posts"; }
   // Edit / Delete buttons. Posts get them only on their own page (open the post to change or delete it, its
   // photos included); the News page cards stay plain links. Events have no page of their own, so their cards get them.
+  // Where the buttons go: under the headline on a post page, inside the card for events.
+  function toolsHost(node) { return node.matches("article") ? node.querySelector(".article-head .wrap") : node; }
   function addTools(node) {
     if (node.matches(".pcard,.feature")) return;
-    if (node.querySelector(":scope > .adm-tools")) return;
+    var host = toolsHost(node);
+    if (host.querySelector(":scope > .adm-tools")) return;
     var path = node.getAttribute("data-item"), type = typeOf(path);
     var label = type === "posts" ? "post" : "event";
     var stop = function (fn) { return function (e) { e.preventDefault(); e.stopPropagation(); fn(); }; };
@@ -214,9 +217,25 @@
       el("button", { type: "button", text: "Edit", "aria-label": "Edit this " + label, onclick: stop(function () { openForm(type, path); }) }),
       el("button", { type: "button", class: "adm-del", text: "Delete", "aria-label": "Delete this " + label, onclick: stop(function () { removeItem(type, path, node); }) }),
     ]);
-    var head = node.matches("article") ? node.querySelector(".article-head .wrap") : node;
-    head.appendChild(tools);
+    host.appendChild(tools);
+    // A live (not draft) post page also gets "Share on Facebook"
+    if (node.matches("article") && !previewOnlyItem(path)) {
+      content.then(function (c) {
+        var it = (c.posts || []).filter(function (p) { return p.path === path; })[0];
+        var ch = readChanges()[path];
+        if ((ch && ch.fields && ch.fields.draft) || (it && it.fields.draft) || tools.querySelector(".adm-fb")) return;
+        tools.appendChild(el("button", { type: "button", class: "adm-fb", text: "Share on Facebook", onclick: stop(shareOnFacebook) }));
+      });
+    }
   }
+  // Facebook's own share window, with this post's address (Facebook reads the headline, summary and cover photo from it)
+  function shareOnFacebook() {
+    var og = document.querySelector('meta[property="og:url"]');
+    var url = PREVIEW ? location.origin + location.pathname : (og && og.content) || location.origin + location.pathname;
+    window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url), "mrga-fb-share", "width=640,height=640,noopener");
+  }
+  // Posts made in the local preview don't exist on the real website, so there's nothing to share
+  function previewOnlyItem(path) { var ch = readChanges()[path]; return !!(ch && ch.isNew); }
   function addAllTools() { document.querySelectorAll("[data-item]").forEach(addTools); }
 
   document.querySelectorAll("[data-admin-new]").forEach(function (slot) {
@@ -315,7 +334,7 @@
       }
       var old = n.querySelector(".adm-changed"); if (old) old.remove();
       (n.matches("article") ? n.querySelector(".article-head .wrap") : n).appendChild(el("span", { class: "adm-changed", text: tag }));
-      n.querySelectorAll(":scope > .adm-tools").forEach(function (x) { x.remove(); });
+      toolsHost(n).querySelectorAll(":scope > .adm-tools").forEach(function (x) { x.remove(); });
       addTools(n);
     });
   }
@@ -578,7 +597,8 @@
               el("p", { class: "adm-hint", text: r.file.path + (r.file.photos.length ? " + " + r.file.photos.length + " photo(s)" : "") }),
               el("pre", { text: r.file.text })]));
         } else {
-          toast((path ? "Saved." : isPost ? "Posted." : "Event added.") + " It will be on the website in about 3 minutes.");
+          toast((path ? "Saved." : isPost ? "Posted." : "Event added.") + " It will be on the website in about 3 minutes." +
+            (isPost && !path && !v.draft ? " Then open the post and click \u201cShare on Facebook\u201d to put it on the MRGA Facebook page." : ""), isPost && !path && !v.draft);
         }
       }).catch(function (e2) {
         saveBtn.disabled = false; saveBtn.textContent = item ? "Save changes" : isPost ? "Post" : "Add event";

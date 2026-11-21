@@ -3,7 +3,15 @@
 {% if noindex %}<meta name="robots" content="noindex">
 {% endif %}<title>{% if title and not isHome %}{{ title }} · {% endif %}McKenzie River Guides Association</title>
 <meta name="description" content="{{ description or 'The McKenzie River Guides Association: professional guides and members working for conservation, stewardship and river access on the McKenzie River, Oregon, since 1931.' }}">
-<link rel="icon" href="/images/logo/mrga-logo.svg" type="image/svg+xml">
+{#- Link previews (Facebook, texts, email): title, summary and, for posts, the cover photo. Full addresses use config.site_url. -#}
+{%- set ogDesc = summary or description or 'The McKenzie River Guides Association: professional guides and members working for conservation, stewardship and river access on the McKenzie River, Oregon, since 1931.' %}
+<meta property="og:site_name" content="McKenzie River Guides Association">
+<meta property="og:title" content="{{ title if (title and not isHome) else 'McKenzie River Guides Association' }}">
+<meta property="og:description" content="{{ ogDesc | striptags | truncate(300) }}">
+<meta property="og:url" content="{{ config.site_url }}{{ page.url }}">
+<meta property="og:type" content="{{ 'article' if page.inputPath.startsWith('./src/posts/') else 'website' }}">
+{% if cover %}<meta property="og:image" content="{{ cover if cover.startsWith('http') else config.site_url + cover }}">
+{% endif %}<link rel="icon" href="/images/logo/mrga-logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">

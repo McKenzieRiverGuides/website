@@ -41,6 +41,8 @@ body.adm-on{padding-bottom:64px}
 .article-head .adm-tools{margin-top:16px}
 .adm-tools button{font:600 13px/1 var(--sans);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--river);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .adm-tools button:hover{background:var(--river);color:#fff}
+.adm-tools .adm-fb{color:#1b4fa8}
+.adm-tools .adm-fb:hover{background:#1b4fa8;color:#fff}
 .adm-tools .adm-del{color:#9b2c1f}
 .adm-tools .adm-del:hover{background:#9b2c1f;color:#fff}
 .adm-changed{display:inline-block;align-self:flex-start;font:700 11px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;background:#f3e2d2;color:var(--cedar-2);padding:4px 8px;border-radius:5px}
