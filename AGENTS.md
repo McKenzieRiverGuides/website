@@ -61,7 +61,8 @@ npm run build      # build into _site/
 - **Membership** (user, 2026-11-20): people who share the association's conservation philosophy are invited
   to join. Every applicant (associate or guide) sends a letter or email asking to join (no official form) and
   needs two sponsors who are ANY current MRGA members; each sponsor sends a letter of recommendation to the
-  secretary or another officer. Guides also need a current Oregon State Marine Board guide license. Every new
+  secretary or another officer. Guides also need a current Oregon State Marine Board guide license (any licensed guide may apply, not only
+  McKenzie guides; never write "guides on the McKenzie" as a requirement). Every new
   member is voted on at the next annual meeting and told the result afterwards; nobody is listed before the
   vote. Associate members are voting members, can hold office and take part in all activities. Each Join card
   must stand on its own (no "same as associates"). Never write copy implying instant membership or listing.
