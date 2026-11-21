@@ -12,7 +12,7 @@ eleventyComputed:
   description: "{{ (g['First Name'] + ' ' + g['Last Name']) | trim }}{% if g | bizName %}, {{ g | bizName }}{% endif %}: professional McKenzie River guide{% if g.Specialty %} ({{ g.Specialty | specs | join(', ') }}){% endif %}. Active member of the McKenzie River Guides Association."
 ---
 {#- One page per active guide, built from the public sheet (src/_data/directory.js). Never show town.
-    A guide who leaves the sheet loses the page at the next build (daily rebuild: .github/workflows/daily-rebuild.yml). -#}
+    A guide who leaves the sheet loses the page at the next build (hourly sheet check: .github/workflows/sheet-sync.yml). -#}
 {%- set name = (g["First Name"] + " " + g["Last Name"]) | trim -%}
 {%- set first = g["First Name"] or name -%}
 {%- set sp = g["Specialty"] | specs -%}

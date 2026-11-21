@@ -83,8 +83,9 @@ npm run build      # build into _site/
   (user, 2026-11-20). Same layout for every guide, no ranking, never town. Only sheet data, never copied from Facebook
   or guide websites. A business name that repeats the guide's own name isn't shown twice (`bizName` filter).
   On Cloudflare the build stops if the sheet can't be read (so guide pages are never wiped); the live site stays up.
-  `.github/workflows/daily-rebuild.yml` rebuilds daily through the Cloudflare deploy hook in the GitHub secret
-  `CF_DEPLOY_HOOK`, so new or departed guides show up within a day.
+  `.github/workflows/sheet-sync.yml` checks the public sheet every hour; when it changed, it updates
+  `.github/sheet-stamp.txt` and pushes, which makes Cloudflare rebuild. No secrets needed. Sheet edits (new guides,
+  bios, photos) show on the site within about an hour.
 - **Directories:** Find a Guide lists active guides only. **Never show or search by town.** Rivers a guide
   fishes go in Specialty ("National Forest McKenzie", "McKenzie River", "Willamette"; trip types "Drift boat",
   "Fly fishing", "Scenic tours", "White water rafting"). National Forest McKenzie means the guide holds the

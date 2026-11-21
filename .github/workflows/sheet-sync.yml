@@ -1,0 +1,33 @@
+# Keep the website in step with the Google Sheet, with no keys or secrets to set up.
+# Every hour this reads the PUBLIC directory sheet ("MRGA Directory – Public (website)", Guides and Members
+# tabs). If anything changed since last time (a new guide, a bio, a photo name, a phone…), it updates
+# .github/sheet-stamp.txt and pushes that one-line change to main. Any push to main makes Cloudflare Pages
+# rebuild the site, so guide pages and directories follow the sheet within about an hour.
+# Nothing is committed when the sheet hasn't changed. "Run workflow" on the Actions tab checks right away.
+name: Sheet sync
+on:
+  schedule:
+    - cron: "23 * * * *"   # every hour
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: sheet-sync
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the public sheet for changes
+        run: |
+          id=$(node -p "require('./src/_data/config.json').public_sheet_id")
+          base="https://docs.google.com/spreadsheets/d/$id/gviz/tq?tqx=out:csv&headers=1&sheet="
+          g=$(curl -fsS "${base}Guides") && m=$(curl -fsS "${base}Members") || { echo "Sheet not readable right now; try next hour."; exit 0; }
+          [ -n "$g" ] || { echo "Empty sheet answer; skipping."; exit 0; }
+          stamp=$(printf '%s\n%s' "$g" "$m" | sha256sum | cut -c1-16)
+          if [ "$stamp" = "$(cat .github/sheet-stamp.txt 2>/dev/null)" ]; then echo "No sheet changes."; exit 0; fi
+          echo "$stamp" > .github/sheet-stamp.txt
+          git config user.name "MRGA sheet sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/sheet-stamp.txt
+          git commit -m "Sheet changed: rebuild the website"
+          git push
