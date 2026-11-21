@@ -35,12 +35,10 @@ body.adm-on{padding-bottom:64px}
 /* ---------- buttons on the page */
 .adm-slot{display:flex;gap:10px}
 .events-top .adm-slot{margin:12px 0 18px}
-.pcard,.feature,.ev{position:relative}
 .adm-tools{display:flex;gap:6px;z-index:3}
-.pcard .adm-tools,.feature .adm-tools{position:absolute;top:10px;right:10px}
+.ev{position:relative}
 .ev .adm-tools{grid-column:2;margin-top:2px}
 .article-head .adm-tools{margin-top:16px}
-.adm-drafts .adm-tools{margin-left:auto}
 .adm-tools button{font:600 13px/1 var(--sans);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--river);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .adm-tools button:hover{background:var(--river);color:#fff}
 .adm-tools .adm-del{color:#9b2c1f}
@@ -54,7 +52,8 @@ body.adm-on{padding-bottom:64px}
 .adm-drafts h2{font-size:22px}
 .adm-drafts p{font-size:14px;color:var(--muted);margin:2px 0 10px}
 .adm-drafts ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.adm-drafts li{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px 8px 14px;font-weight:600}
+.adm-drafts li a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-weight:600;color:var(--river);text-decoration:none}
+.adm-drafts li a:hover{border-color:var(--river);text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- messages */
 .adm-toasts{position:fixed;right:16px;bottom:76px;z-index:80;display:flex;flex-direction:column;gap:10px;max-width:min(440px,calc(100% - 32px))}

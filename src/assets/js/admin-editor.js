@@ -202,7 +202,10 @@
 
   // ---------------------------------------------------------------- buttons on the page
   function typeOf(path) { return path.indexOf("src/events/") === 0 ? "events" : "posts"; }
+  // Edit / Delete buttons. Posts get them only on their own page (open the post to change or delete it, its
+  // photos included); the News page cards stay plain links. Events have no page of their own, so their cards get them.
   function addTools(node) {
+    if (node.matches(".pcard,.feature")) return;
     if (node.querySelector(":scope > .adm-tools")) return;
     var path = node.getAttribute("data-item"), type = typeOf(path);
     var label = type === "posts" ? "post" : "event";
@@ -235,11 +238,10 @@
       Object.keys(ch).forEach(function (path) { var x = ch[path]; if (x.isNew && x.type === "posts" && x.fields.draft) drafts.push({ path: path, fields: x.fields }); });
       var old = document.querySelector(".adm-drafts"); if (old) old.remove();
       if (!drafts.length) return;
-      var box = el("div", { class: "adm-drafts" }, [el("h2", { text: "Drafts" }), el("p", { text: "Only admins see these. Untick “Draft” to put a post on the website." })]);
+      var box = el("div", { class: "adm-drafts" }, [el("h2", { text: "Drafts" }), el("p", { text: "Only admins see these. Open a draft to edit or delete it; untick “Draft” to put it on the website." })]);
       var ul = el("ul");
       drafts.forEach(function (d) {
-        var li = el("li", { "data-item": d.path }, [el("span", { text: d.fields.title || "(no headline)" })]);
-        ul.appendChild(li); addTools(li);
+        ul.appendChild(el("li", {}, [el("a", { href: d.url || itemUrl("posts", d.path), text: d.fields.title || "(no headline)" })]));
       });
       box.appendChild(ul);
       grid.parentNode.insertBefore(box, grid);
