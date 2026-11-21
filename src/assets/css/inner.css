@@ -237,6 +237,8 @@ section.boat .split > div > p{opacity:.85;max-width:520px}
 .join-card .price{font:600 30px/1 var(--serif)}
 .join-card .price small{font:500 14px var(--sans);opacity:.75;margin-left:6px}
 .join-card .grow{flex:1}
+.join-card .how{font-size:14.5px;line-height:1.55}
+.join-card .how a{color:inherit;text-underline-offset:2px}
 .join-card .btn{align-self:flex-start}
 .join-card.a{background:var(--cedar);color:#fff}
 .join-card.a .eyebrow{color:#fbe1c8}
@@ -246,7 +248,8 @@ section.boat .split > div > p{opacity:.85;max-width:520px}
 .join-card.b p,.join-card.b li,.join-card.c p{color:var(--muted)}
 .join-card.c{border:1.5px dashed rgba(31,61,58,.3)}
 .join-note{margin-top:14px;font-size:14px;color:var(--muted)}
-.steps{counter-reset:s;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.steps{counter-reset:s;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+@media (max-width:1080px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .steps li{counter-increment:s;border-top:2px solid var(--river);padding-top:16px}
 .steps li::before{content:counter(s,decimal-leading-zero);display:block;font:600 14px/1 var(--sans);color:var(--cedar);letter-spacing:.1em;margin-bottom:10px}
 .steps h3{font-size:20px;margin-bottom:6px}

@@ -58,9 +58,13 @@ npm run build      # build into _site/
 - MRGA is a **501(c)(4)**: dues and payments are never tax-deductible. Tax-deductible giving goes to the
   separate **McKenzie Guides Foundation**, a 501(c)(3). Its URL goes in Site settings (`foundation_url`);
   until then "Support the river" goes to the top of Join and Foundation links go to `/join/#give`.
-- **Membership:** every new member (associate or guide) is voted in at the annual meeting. Guides need two
-  sponsors who are active guides plus a current Oregon Marine Board license. Nobody is listed before the
-  vote. Never write copy implying instant membership or listing.
+- **Membership** (user, 2026-11-20): people who share the association's conservation philosophy are invited
+  to join. Every applicant (associate or guide) sends a letter or email asking to join (no official form) and
+  needs two sponsors who are ANY current MRGA members; each sponsor sends a letter of recommendation to the
+  secretary or another officer. Guides also need a current Oregon State Marine Board guide license. Every new
+  member is voted on at the next annual meeting and told the result afterwards; nobody is listed before the
+  vote. Associate members are voting members, can hold office and take part in all activities. Each Join card
+  must stand on its own (no "same as associates"). Never write copy implying instant membership or listing.
 - **Annual meeting:** second Saturday of January (officers elected there for two-year terms, every other
   year). **Annual dinner & auction:** April, members only, ticketed
   (members who attend buy a ticket; space for about 100). Never present it as open to the public.

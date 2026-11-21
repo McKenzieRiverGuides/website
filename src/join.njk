@@ -18,25 +18,29 @@ permalink: /join/
     <div class="join">
       <div class="join-card a">
         <span class="eyebrow">Associate members</span>
-        <h3>Support the McKenzie</h3>
-        <p>For friends of the river, often our guides' clients.</p>
-        <ul class="grow">
-          <li>Your name on the supporters list</li>
-          <li>News &amp; Stories{% if collections.newsletters.length %} and the newsletter{% endif %}</li>
+        <h3>Join the association</h3>
+        <p>For people who share our conservation philosophy, often our guides' clients.</p>
+        <ul>
+          <li>A vote in association decisions, and you can hold office</li>
+          <li>Take part in all association activities</li>
+          <li>Your name on the members &amp; supporters list</li>
         </ul>
+        <p class="how grow"><b>How to join:</b> Send a letter or email asking to join, and ask two current MRGA members to be your sponsors. Each sponsor sends a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>. The members vote on your application at the next annual meeting, held the second Saturday in January. We'll let you know the result after the meeting.</p>
         {% if text.join.associate_dues %}<div class="price">{{ text.join.associate_dues }} <small>per year</small></div>{% else %}<div class="price">$__ <small>per year</small> <span class="sample">Dues to come</span></div>{% endif %}
-        <a class="btn" href="{{ text.join.associate_apply_url or ('mailto:' + settings.email + '?subject=Associate%20membership') }}">Apply as an associate</a>
+        <a class="btn" href="{{ text.join.associate_apply_url or ('mailto:' + settings.email + '?subject=Associate%20membership%20request%20(attn.%20Secretary)') }}">Ask to join as an associate</a>
       </div>
       <div class="join-card b">
         <span class="eyebrow">For guides</span>
         <h3>Join as a guide</h3>
-        <p>For professional guides on the McKenzie. Requires two sponsors who are active guides and a current Oregon Marine Board license.</p>
-        <ul class="grow">
-          <li>Listing in Find a Guide</li>
-          <li>A voice in association decisions</li>
+        <p>For professional guides on the McKenzie who share our conservation philosophy and hold a current Oregon State Marine Board guide license.</p>
+        <ul>
+          <li>A vote in association decisions, and you can hold office</li>
+          <li>Take part in all association activities</li>
+          <li>Your own page and listing in Find a Guide</li>
         </ul>
+        <p class="how grow"><b>How to join:</b> Send a letter or email asking to join, and ask two current MRGA members to be your sponsors. Each sponsor sends a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>. Include proof of your current Oregon State Marine Board guide license. The members vote on your application at the next annual meeting, held the second Saturday in January. We'll let you know the result after the meeting.</p>
         {% if text.join.guide_dues %}<div class="price" style="color:var(--river)">{{ text.join.guide_dues }} <small>per year</small></div>{% else %}<div class="price" style="color:var(--river)">$__ <small>per year</small> <span class="sample">Dues to come</span></div>{% endif %}
-        <a class="btn btn-line" href="{{ text.join.guide_apply_url or ('mailto:' + settings.email + '?subject=Guide%20membership') }}">Apply to join</a>
+        <a class="btn btn-line" href="{{ text.join.guide_apply_url or ('mailto:' + settings.email + '?subject=Guide%20membership%20request%20(attn.%20Secretary)') }}">Ask to join as a guide</a>
       </div>
       <div class="join-card c" id="give">
         <span class="eyebrow">Tax-deductible giving</span>
@@ -53,8 +57,9 @@ permalink: /join/
   <div class="wrap">
     <div class="sec-head"><div><span class="eyebrow">How it works</span><h2>How membership works</h2></div></div>
     <ol class="steps">
-      <li><h3>Apply</h3><p>Choose associate member or guide. Guides name two sponsors who are current active guides and show a current Oregon Marine Board license. {% if text.join.how_to_apply %}{{ text.join.how_to_apply }}{% else %}<span class="placeholder-text">How to apply and pay dues: to come.</span>{% endif %}</p></li>
-      <li><h3>Membership vote</h3><p>The members vote on every new associate and guide member at the annual meeting.</p></li>
+      <li><h3>Ask to join</h3><p>Send a letter or email to the association asking to join. Guides include proof of a current Oregon State Marine Board guide license. {% if text.join.how_to_apply %}{{ text.join.how_to_apply }}{% endif %}</p></li>
+      <li><h3>Two sponsors</h3><p>Two current MRGA members each send a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>.</p></li>
+      <li><h3>Membership vote</h3><p>The members vote on your application at the next annual meeting, the second Saturday in January. We'll let you know the result after the meeting.</p></li>
       <li><h3>You're on the list</h3><p>Once you're voted in, your name goes on the website: guides in Find a Guide, associates on Members &amp; supporters. No one is listed before the vote.</p></li>
     </ol>
   </div>
@@ -66,8 +71,9 @@ permalink: /join/
     <div class="faq">
       <details><summary>Are dues tax-deductible?</summary><p>No. MRGA is a 501(c)(4) membership association, so dues aren't deductible as charitable donations. For a tax-deductible gift, give to the McKenzie Guides Foundation, a separate 501(c)(3).</p></details>
       <details><summary>When do memberships renew?</summary>{% if text.join.renewal %}{{ text.join.renewal | paras | safe }}{% else %}<p class="placeholder-text">Placeholder answer for the board to fill in.</p>{% endif %}</details>
-      <details><summary>Who can join as a guide?</summary><p>Professional guides on the McKenzie who hold a current Oregon Marine Board license and have two sponsors who are current active guides. New guide members are approved by a membership vote at the annual meeting.</p></details>
-      <details><summary>When will my name appear on the website?</summary><p>After the membership votes you in at the annual meeting. Applicants aren't listed until then.</p></details>
+      <details><summary>Who can join as a guide?</summary><p>Professional guides on the McKenzie who share our conservation philosophy and hold a current Oregon State Marine Board guide license. Like every new member, you need two current MRGA members as sponsors, and the members vote on your application at the annual meeting.</p></details>
+      <details><summary>Can associate members vote and hold office?</summary><p>Yes. Associate members are voting members of the association, can hold office and take part in all association activities.</p></details>
+      <details><summary>When will my name appear on the website?</summary><p>After the membership votes you in at the annual meeting. We'll let you know the result after the meeting. Applicants aren't listed until then.</p></details>
       <details><summary>How do I update my listing?</summary><p>Active guides can edit their own Find a Guide card. Go to <a href="/edit-listing/">Edit my listing</a> and we'll email you a sign-in link. Changes show on the website within a few minutes.</p></details>
     </div>
   </div>
