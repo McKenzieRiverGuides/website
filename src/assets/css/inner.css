@@ -237,7 +237,16 @@ section.boat .split > div > p{opacity:.85;max-width:520px}
 .join-card .price{font:600 30px/1 var(--serif)}
 .join-card .price small{font:500 14px var(--sans);opacity:.75;margin-left:6px}
 .join-card .grow{flex:1}
+/* "How to become…" line on the Join cards: click to open the full how-to-join text inside the card */
+/* Cards share one height while closed; once one is opened, only that card grows */
+.join:has(.how[open]){align-items:start}
 .join-card .how{font-size:14.5px;line-height:1.55}
+.join-card .how summary{cursor:pointer;font:600 15px/1.35 var(--sans);list-style:none;display:flex;gap:8px;align-items:baseline;padding:10px 0;border-top:1px solid currentColor;border-bottom:1px solid currentColor;border-color:rgba(127,127,127,.3)}
+.join-card .how summary::-webkit-details-marker{display:none}
+.join-card .how summary::after{content:"+";margin-left:auto;font-size:20px;line-height:1}
+.join-card .how[open] summary::after{content:"\2212"}
+.join-card .how summary:hover{text-decoration:underline;text-underline-offset:3px}
+.join-card .how p{margin-top:10px}
 .join-card .how a{color:inherit;text-underline-offset:2px}
 .join-card .btn{align-self:flex-start}
 .join-card.a{background:var(--cedar);color:#fff}

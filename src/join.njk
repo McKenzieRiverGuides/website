@@ -25,7 +25,7 @@ permalink: /join/
           <li>Take part in all association activities</li>
           <li>Your name on the members &amp; supporters list</li>
         </ul>
-        <p class="how grow"><b>How to join:</b> Send a letter or email asking to join, and ask two current MRGA members to be your sponsors. Each sponsor sends a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>. The members vote on your application at the next annual meeting, held the second Saturday in January. We'll let you know the result after the meeting.</p>
+        <details class="how grow"><summary>How to become an associate member</summary><p>Send a letter or email asking to join, and ask two current MRGA members to be your sponsors. Each sponsor sends a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>. The members vote on your application at the next annual meeting, held the second Saturday in January. We'll let you know the result after the meeting.</p></details>
         {% if text.join.associate_dues %}<div class="price">{{ text.join.associate_dues }} <small>per year</small></div>{% else %}<div class="price">$__ <small>per year</small> <span class="sample">Dues to come</span></div>{% endif %}
         <a class="btn" href="{{ text.join.associate_apply_url or ('mailto:' + settings.email + '?subject=Associate%20membership%20request%20(attn.%20Secretary)') }}">Ask to join as an associate</a>
       </div>
@@ -38,7 +38,7 @@ permalink: /join/
           <li>Take part in all association activities</li>
           <li>Your own page and listing in Find a Guide</li>
         </ul>
-        <p class="how grow"><b>How to join:</b> Send a letter or email asking to join, and ask two current MRGA members to be your sponsors. Each sponsor sends a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>. Include proof of your current Oregon State Marine Board guide license. The members vote on your application at the next annual meeting, held the second Saturday in January. We'll let you know the result after the meeting.</p>
+        <details class="how grow"><summary>How to become an MRGA guide</summary><p>Send a letter or email asking to join, and ask two current MRGA members to be your sponsors. Each sponsor sends a letter of recommendation to the secretary or another <a href="/leadership/">officer</a>. Include proof of your current Oregon State Marine Board guide license. The members vote on your application at the next annual meeting, held the second Saturday in January. We'll let you know the result after the meeting.</p></details>
         {% if text.join.guide_dues %}<div class="price" style="color:var(--river)">{{ text.join.guide_dues }} <small>per year</small></div>{% else %}<div class="price" style="color:var(--river)">$__ <small>per year</small> <span class="sample">Dues to come</span></div>{% endif %}
         <a class="btn btn-line" href="{{ text.join.guide_apply_url or ('mailto:' + settings.email + '?subject=Guide%20membership%20request%20(attn.%20Secretary)') }}">Ask to join as a guide</a>
       </div>
