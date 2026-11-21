@@ -62,22 +62,7 @@ permalink: /about/
 
 <section class="alt">
   <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">Our history</span><h2>Nearly a century on the McKenzie</h2></div>
-    </div>
-    <ol class="timeline">
-      {%- for m in t.timeline %}
-      <li class="confirmed"><span class="yr">{{ m.year }}</span><div><h3>{{ m.title }}</h3>{% if m.text %}<p>{{ m.text }}</p>{% endif %}</div></li>
-      {%- endfor %}
-      {%- if t.timeline.length < 4 %}
-      <li><span class="yr">19__</span><div><h3>More milestones to come <span class="sample">Placeholder</span></h3><p>The early drift-boat era, river projects, the Wooden Boat Festival or the Oregon's Boat film. The board will add these.</p></div></li>
-      {%- endif %}
-    </ol>
-    <div class="photo-row" style="margin-top:28px">
-      <div class="ph"><span class="ph-label">Historic photo (to come)</span></div>
-      <div class="ph"><span class="ph-label">Historic photo</span></div>
-      <div class="ph"><span class="ph-label">Historic photo</span></div>
-    </div>
+    {% include "partials/history.njk" %}
   </div>
 </section>
 
