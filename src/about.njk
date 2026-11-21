@@ -49,7 +49,18 @@ permalink: /about/
   </div>
 </section>
 
-<section>
+<section id="leadership">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Leadership {{ leadership.year }}</span><h2>Officers &amp; board</h2></div>
+      <p>The association is led by guides elected by the membership at the annual meeting.</p>
+    </div>
+    {% include "partials/officers.njk" %}
+    <p style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-line" href="/leadership/">Meet the full board</a><a class="btn btn-line" href="/contact/">Contact the association</a></p>
+  </div>
+</section>
+
+<section class="alt">
   <div class="wrap">
     <div class="sec-head">
       <div><span class="eyebrow">Our history</span><h2>Nearly a century on the McKenzie</h2></div>
@@ -91,15 +102,5 @@ permalink: /about/
         <span class="go">This year's festival →</span>
       </a>
     </div>
-  </div>
-</section>
-
-<section class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><span class="eyebrow">Leadership</span><h2>Officers &amp; board</h2></div>
-      <p>The association is led by guides elected by the membership.</p>
-    </div>
-    <p style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-line" href="/leadership/">Meet our officers &amp; board</a><a class="btn btn-line" href="/contact/">Contact the association</a></p>
   </div>
 </section>

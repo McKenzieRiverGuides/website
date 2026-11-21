@@ -1,11 +1,17 @@
 /* MRGA shared script: phone menu + helpers for reading the public directory sheet. */
 (function () {
   var b = document.body, btn = b.querySelector(".menu-btn"), panel = document.getElementById("menuPanel");
-  if (btn && panel) btn.addEventListener("click", function () {
-    var open = panel.classList.toggle("open");
+  if (!btn || !panel) return;
+  function setOpen(open) {
+    panel.classList.toggle("open", open);
     b.classList.toggle("menu-open", open);
     btn.setAttribute("aria-expanded", open);
     btn.textContent = open ? "Close" : "Menu";
+  }
+  btn.addEventListener("click", function () { setOpen(!panel.classList.contains("open")); });
+  /* Esc closes the menu and puts the keyboard back on the Menu button. */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("open")) { setOpen(false); btn.focus(); }
   });
 })();
 

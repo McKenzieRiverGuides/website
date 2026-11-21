@@ -7,7 +7,7 @@ darkHead: true
 <article>
   <header class="article-head">
     <div class="wrap" style="max-width:860px">
-      <div class="crumbs"><a href="/">Home</a> / <a href="/news/">News &amp; Stories</a></div>
+      <div class="crumbs"><a href="/">Home</a> / <a href="/news/">News</a></div>
       <span class="eyebrow">{% if isNewsletter %}Newsletter{% elif categories and categories.length %}{{ categories[0] }}{% else %}News{% endif %}</span>
       <h1>{{ title }}</h1>
       <div class="byline"><time datetime="{{ page.date | isoDate }}">{{ page.date | monthYear }}</time>{% if author %}<span>·</span><span>By {{ author }}</span>{% endif %}</div>

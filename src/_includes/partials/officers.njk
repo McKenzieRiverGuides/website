@@ -1,0 +1,6 @@
+{#- Officer cards (photo, role, name, email, phone) from leadership.json. Used on Leadership, About and Contact. -#}
+<div class="officers">
+  {%- for o in leadership.officers %}
+  <div class="officer">{% if o.photo %}<img src="{{ o.photo }}" alt="{{ o.name }}" loading="lazy">{% else %}<div class="ph" aria-hidden="true" style="grid-row:1/span 3;aspect-ratio:1;border-radius:10px"></div>{% endif %}<span class="role">{{ o.role }}</span><h3>{{ o.name }}</h3><p class="contact">{% if o.email %}{% set at = o.email.split("@") %}<a href="mailto:{{ o.email }}">{{ at[0] }}<wbr>@{{ at[1] }}</a>{% endif %}{% if o.phone %}<a href="tel:+1{{ o.phone | telHref }}">{{ o.phone }}</a>{% endif %}</p></div>
+  {%- endfor %}
+</div>

@@ -1,19 +1,19 @@
-{#- Shared site header + phone menu. navKey marks the current page; the homepage has no "Home" link (isHome). -#}
+{#- Shared site header + phone menu. navKey marks the current page. The logo is the way home (no "Home" link).
+   Leadership and Members live in the footer and on About/Join; Conservation and Drift Boat are deferred (see AGENTS.md). -#}
 {%- set nav = [
-  ["home", "Home", "/"],
-  ["leadership", "Leadership", "/leadership/"],
   ["guides", "Find a Guide", "/find-a-guide/"],
-  ["members", "Members", "/members/"],
-  ["news", "News &amp; Stories", "/news/"],
-  ["river", "River", "/river-conditions/"]
+  ["river", "River Conditions", "/river-conditions/"],
+  ["news", "News", "/news/"],
+  ["about", "About", "/about/"],
+  ["contact", "Contact", "/contact/"]
 ] -%}
-{#- Hidden for now (see AGENTS.md): Conservation (after launch), Drift Boat (story lives on About). -#}
 {%- set links -%}
-{%- for n in nav -%}{%- if not (isHome and n[0] == "home") -%}
+{%- for n in nav -%}
 <li><a href="{{ n[2] }}"{% if n[0] == navKey %} aria-current="page"{% endif %}>{{ n[1] | safe }}</a></li>
-{%- endif -%}{%- endfor -%}
+{%- endfor -%}
 {%- endset -%}
 {%- set joinBtn -%}<a class="btn btn-cedar" href="/join/"{% if navKey == "join" %} aria-current="page"{% endif %}>Join</a>{%- endset -%}
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-head{% if darkHead %} dark{% endif %}">
   <div class="wrap head-row">
     <a class="logo" href="/">
@@ -28,6 +28,6 @@
   </div>
 </header>
 <nav class="menu-panel" id="menuPanel" aria-label="Site menu">
-  <ul>{{ links | safe }}<li><a href="/contact/"{% if navKey == "contact" %} aria-current="page"{% endif %}>Contact</a></li></ul>
+  <ul>{{ links | safe }}</ul>
   {{ joinBtn | safe }}
 </nav>

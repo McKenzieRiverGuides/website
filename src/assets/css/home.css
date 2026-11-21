@@ -280,3 +280,9 @@ footer .logo-text{color:#fff}
 .menu-panel{padding-top:150px}
 .menu-panel a.btn{display:inline-flex;padding:13px 22px;border-bottom:0}
 @media (max-width:600px){.menu-panel{padding-top:116px}}
+
+/* Skip link (keyboard / screen readers): hidden until focused. Phone-menu Join button: full width, centered. */
+.skip-link{position:absolute;left:16px;top:-60px;z-index:100;background:#fff;color:var(--river);padding:10px 16px;border-radius:8px;font:600 15px var(--sans);text-decoration:none}
+.skip-link:focus{top:12px}
+main:focus{outline:none}
+.menu-panel a.btn{display:flex;justify-content:center;padding:15px 22px;border-bottom:0}

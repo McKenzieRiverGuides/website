@@ -85,9 +85,13 @@ npm run build      # build into _site/
   `partials/head.njk`).
 - Only the homepage (historic photo slideshow, "old film" look) and About (photo hero) have the large title
   area. Every other page uses `.page-hero.compact` and its first section has `class="tight"`.
-- Top nav: Home (inner pages only; the homepage has none), Leadership, Find a Guide, Members, News & Stories, River,
-  Join button. Conservation and Drift Boat pages are deferred (do not add them unless asked). Meeting
-  minutes page was cut.
+- Top nav (set 2026-11-20, same on phone and desktop): Find a Guide, River Conditions, News, About, Contact,
+  Join button. No "Home" link: the logo goes home. Leadership, Members & supporters, the festival and "edit my
+  listing" are in the footer (Visit / The Association / Contact) and linked from About and Join. The News page
+  itself keeps its title "News & Stories". Conservation and Drift Boat pages are deferred (do not add them unless
+  asked). Meeting minutes page was cut.
+- Accessibility: every page has a "Skip to content" link (header partial → `<main id="main">`), and Esc closes
+  the phone menu.
 - Logo: 95th-anniversary badge through 2026; the round "Organized 1931" logo switches on automatically from
   2027 (`?year=2027` previews it).
 - Officers show photo, role, name, email and phone (as on the old site). Board grouped by term-end year.
