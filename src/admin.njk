@@ -1,0 +1,62 @@
+---
+title: Admin sign in
+description: Sign in to add and edit News & Stories posts and events.
+permalink: /admin/
+pageCss: admin.css
+eleventyExcludeFromCollections: true
+noindex: true
+---
+{#- Admin sign in for the on-site editor. On the live site Cloudflare Access asks for the email and the emailed
+   code before this page even opens (see functions/api/admin/[[path]].js), so the page only confirms the sign-in.
+   In the local preview (localhost) the sign-in is pretend: any email and any 6-digit code work, nothing is saved. -#}
+<div class="page-hero compact">
+  <div class="wrap">
+    <div>
+      <h1>Admin <em>sign in</em></h1>
+      <p class="status">For the secretary and officers: add and edit News &amp; Stories posts and events.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="adm-signin" data-admin-signin>
+      <p class="adm-checking">Checking your sign-in…</p>
+
+      {#- Local preview only: pretend sign-in -#}
+      <form class="adm-card" data-step="email" hidden>
+        <span class="adm-preview-tag">Preview mode</span>
+        <h2>Sign in</h2>
+        <p>Type your email. We'll email you a 6-digit code. No password needed.</p>
+        <label for="adm-email">Your email</label>
+        <input id="adm-email" type="email" required autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com">
+        <button class="btn btn-cedar" type="submit">Email me a code</button>
+        <p class="adm-note">Preview: no email is sent. Any 6-digit code will work on the next step.</p>
+      </form>
+      <form class="adm-card" data-step="code" hidden>
+        <span class="adm-preview-tag">Preview mode</span>
+        <h2>Check your email</h2>
+        <p>We sent a 6-digit code to <strong data-email></strong>. Type it here.</p>
+        <label for="adm-code">Code</label>
+        <input id="adm-code" type="text" required inputmode="numeric" autocomplete="one-time-code" pattern="\d{6}" maxlength="6" placeholder="123456">
+        <button class="btn btn-cedar" type="submit">Sign in</button>
+        <p class="adm-note"><button type="button" class="adm-link" data-back>Use a different email</button></p>
+      </form>
+
+      {#- Signed in -#}
+      <div class="adm-card" data-step="done" hidden>
+        <span class="adm-preview-tag" data-preview-only hidden>Preview mode</span>
+        <h2>You're signed in</h2>
+        <p>Signed in as <strong data-email></strong>. While you're signed in, News &amp; Stories shows <strong>New post</strong> and <strong>New event</strong> buttons, and every post and event has <strong>Edit</strong> and <strong>Delete</strong>.</p>
+        <p>Saved changes are on the website in about 3 minutes.</p>
+        <p class="adm-actions"><a class="btn btn-cedar" href="/news/">Go to News &amp; Stories</a><button type="button" class="btn btn-line" data-signout>Sign out</button></p>
+      </div>
+
+      {#- Live site, but the check failed -#}
+      <div class="adm-card" data-step="failed" hidden>
+        <h2>Sign-in didn't work</h2>
+        <p>Your email may not be on the admin list, or the sign-in timed out. Reload this page to try again. If it keeps happening, ask another officer to check that your email is on the list.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -14,6 +14,7 @@ pageCss: events.css
       <h1>News &amp; <em>Stories</em></h1>
       <p class="status">Association news, river updates and stories from the McKenzie.</p>
     </div>
+    <div class="adm-slot" data-admin-new="posts" hidden></div>
     {% if collections.newsletters.length %}<a class="btn btn-ghost" href="#newsletters">Past newsletters</a>{% endif %}
   </div>
 </div>
@@ -24,12 +25,13 @@ pageCss: events.css
     <div class="events-top" id="events" data-events>
       <span class="eyebrow">Coming up</span>
       <h2>Association events</h2>
+      <div class="adm-slot" data-admin-new="events" hidden></div>
       {% include "partials/event-cards.njk" %}
     </div>
     {%- endif %}
 
     {% if first -%}
-    <a class="feature" href="{{ first.url }}">
+    <a class="feature" href="{{ first.url }}" data-item="{{ first.inputPath | replace('./', '') }}">
       {% if first.data.cover %}<img class="cover" src="{{ first.data.cover }}" alt="" loading="eager">{% else %}<div class="ph"></div>{% endif %}
       <div>
         <time datetime="{{ first.date | isoDate }}">{{ first.date | monthYear }}</time>
@@ -51,7 +53,7 @@ pageCss: events.css
 
     <div class="post-grid">
       {%- for p in posts %}{% if not loop.first %}
-      <a class="pcard" href="{{ p.url }}" data-cats="{{ (p.data.categories or []) | join('|') }}">{% if p.data.cover %}<img class="cover" src="{{ p.data.cover }}" alt="" loading="lazy">{% else %}<div class="ph"></div>{% endif %}{% if p.data.categories and p.data.categories.length %}<span class="cat">{{ p.data.categories[0] }}</span>{% endif %}<h3>{{ p.data.title }}</h3>{% if p.data.summary %}<p>{{ p.data.summary }}</p>{% endif %}<time datetime="{{ p.date | isoDate }}">{{ p.date | monthYear }}</time></a>
+      <a class="pcard" href="{{ p.url }}" data-item="{{ p.inputPath | replace('./', '') }}" data-cats="{{ (p.data.categories or []) | join('|') }}">{% if p.data.cover %}<img class="cover" src="{{ p.data.cover }}" alt="" loading="lazy">{% else %}<div class="ph"></div>{% endif %}{% if p.data.categories and p.data.categories.length %}<span class="cat">{{ p.data.categories[0] }}</span>{% endif %}<h3>{{ p.data.title }}</h3>{% if p.data.summary %}<p>{{ p.data.summary }}</p>{% endif %}<time datetime="{{ p.date | isoDate }}">{{ p.date | monthYear }}</time></a>
       {%- endif %}{% endfor %}
     </div>
 

@@ -13,6 +13,15 @@ Nothing private ever goes in this repository. It may be public and it is exactly
   output folder `_site`, Node 20+). Every push to `main` deploys; other branches get preview links.
 - **Pages CMS** (app.pagescms.org) is the editor for the secretary (Leah Helfrich) and other
   non-technical editors. Its configuration is `.pages.yml`. Every save is a commit → automatic rebuild.
+- **On-site editor** ("post from the page"): admins sign in at `/admin/` (Cloudflare Access, emailed one-time PIN;
+  the admin email list lives in the Access policy, not in code). Signed-in admins get New post / New event / Edit /
+  Delete on News & Stories, post pages and event cards (`assets/js/admin.js` loader on every page →
+  `admin-editor.js` + `admin.css` only for admins; visitors load nothing else). Saves go to the Pages Function
+  `functions/api/admin/[[path]].js`, which checks the Access token and commits the same Markdown files Pages CMS
+  writes (rules shared in `lib/admin-content.js`; keep its fields in step with `.pages.yml`). Photos are shrunk in
+  the browser (1600 px JPEG) and saved in `src/images/posts/<slug>/`. On localhost the editor runs in a pretend
+  preview mode (any email/code; nothing saved). Settings in Cloudflare Pages: `GITHUB_TOKEN` (secret),
+  `GITHUB_REPO`, `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`. `/admin/content.json` lists all posts (drafts too) and events.
 - **Guide and member directories** are NOT in this repo. They live in Google Sheets owned by
   the association Google account (private "MRGA Roster – Master" → public "MRGA Directory – Public (website)",
   which has public columns only). The build reads the public sheet (gviz CSV) and bakes the lists into

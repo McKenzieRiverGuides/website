@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if title and not isHome %}{{ title }} · {% endif %}McKenzie River Guides Association</title>
+{% if noindex %}<meta name="robots" content="noindex">
+{% endif %}<title>{% if title and not isHome %}{{ title }} · {% endif %}McKenzie River Guides Association</title>
 <meta name="description" content="{{ description or 'The McKenzie River Guides Association: professional guides and members working for conservation, stewardship and river access on the McKenzie River, Oregon, since 1931.' }}">
 <link rel="icon" href="/images/logo/mrga-logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">

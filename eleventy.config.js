@@ -8,6 +8,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/_redirects": "_redirects" });
   eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
+  // On-site editor (assets/js/admin-editor.js): Markdown ↔ formatted text in the browser
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/marked/lib/marked.umd.js": "assets/vendor/marked.js",
+    "node_modules/turndown/lib/turndown.browser.umd.js": "assets/vendor/turndown.js",
+  });
   eleventyConfig.ignores.add("src/**/README.md");
 
   eleventyConfig.addGlobalData("layout", "layouts/base.njk");

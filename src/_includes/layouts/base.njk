@@ -12,6 +12,7 @@
 </main>
 {% include "partials/footer.njk" %}
 <script src="/assets/js/site.js?v={{ build.version }}"></script>
+<script src="/assets/js/admin.js?v={{ build.version }}" data-v="{{ build.version }}"></script>
 {% if pageScript %}<script src="/assets/js/{{ pageScript }}?v={{ build.version }}"></script>{% endif %}
 </body>
 </html>

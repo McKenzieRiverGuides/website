@@ -4,7 +4,7 @@ navKey: news
 darkHead: true
 ---
 {#- One News & Stories post (also used for newsletter issues). The cover photo shows on top unless the text already starts with it. -#}
-<article>
+<article{% if page.inputPath.startsWith("./src/posts/") %} data-item="{{ page.inputPath | replace('./', '') }}"{% endif %}>
   <header class="article-head">
     <div class="wrap" style="max-width:860px">
       <div class="crumbs"><a href="/">Home</a> / <a href="/news/">News</a></div>
